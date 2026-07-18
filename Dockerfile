@@ -15,11 +15,11 @@ ENV NEXT_TELEMETRY_DISABLED=1
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN npx prisma generate
-RUN npm run build
-# DB zur Build-Zeit anlegen + seeden (Inhalte liegen im Repo unter prisma/seed-content)
+# DB zuerst anlegen + seeden — der Build (SSG/generateStaticParams) liest die DB aus.
 RUN mkdir -p /app/seed \
     && DATABASE_URL="file:/app/seed/prod.db" npx prisma migrate deploy \
     && DATABASE_URL="file:/app/seed/prod.db" npx tsx prisma/seed.ts
+RUN DATABASE_URL="file:/app/seed/prod.db" npm run build
 
 # ---- Runner (schlank) ----
 FROM base AS runner
