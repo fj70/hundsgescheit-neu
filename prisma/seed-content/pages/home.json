@@ -1,0 +1,104 @@
+[
+  {
+    "type": "HERO",
+    "data": {
+      "headline": "Herzlich Willkommen in der Hundeschule Hundsgescheit",
+      "subline": "Hundetraining mit Herz & Verstand",
+      "image": "/uploads/2026/06/339a0049-2495-404d-9db7-c630ed9d3bed-768x1024.jpeg",
+      "primary": [],
+      "secondary": []
+    }
+  },
+  {
+    "type": "RICHTEXT",
+    "data": {
+      "heading": "",
+      "html": "<h5>Vom <strong>reaktiven</strong> <strong>verhaltensauffälligem</strong> Hund zum Musterschüler.</h5><ul><li>Dein Hund explodiert in jeder Hundebegegnung?</li><li>Spaziergänge werden zum Spießrutenlauf?</li><li>Dein Hund ist draußen wie weggebeamt und nimmt dich überhaupt nicht wahr?</li><li>Dein Hund kommt einfach nicht zur Ruhe?</li></ul>"
+    }
+  },
+  {
+    "type": "RICHTEXT",
+    "data": {
+      "heading": "Meine Schwerpunkte als Hundetrainerin",
+      "html": ""
+    }
+  },
+  {
+    "type": "RICHTEXT",
+    "data": {
+      "heading": "",
+      "html": "<h5>1. Schwerpunkt</h5><h2>Reaktive Hunde</h2><p>Durch das Training und das Zusammenleben mit meinem eigenen impulsiven und reaktiven Hund verstehe ich, wie du dich fühlst. Jedes Mal, wenn dein Hund in die Leine springt, bellt oder vielleicht sogar zubeißen will, möchtest du im Erdboden versinken. Dich überkommt eine Flut aus unangenehmen Gefühlen: Scham, Hilflosigkeit, Wut, Verzweiflung. Ich kenne das. Ich habe es selbst durchlebt. Und aus heutiger Perspektive möchte ich dir eins sagen: Dieser eine Hund wird dein Leben komplett auf denKopf stellen. Er wird dich von Grund auf verändern. Denn Hunde wie deiner bewirken etwas bei ihrem Menschen: Sie zwingen uns in die Entwicklung, in die Selbstreflexion. Bist du bereit für wirkliche Veränderung? Ich arbeite ganzheitlich an der Beziehung zwischen dir und deinem Hund. Mein Wunsch ist jedem Hund zu Ausgeglichenheit und Entspannung zu verhelfen. Die Bedürfnisse des Hundes zu kennen und zu erfüllen bedeutet Verantwortung zu übernehmen und dem Hund Orientierung zu geben.</p><p><a href=\"/kontakt\">Jetzt Kontakt aufnehmen</a></p>"
+    }
+  },
+  {
+    "type": "RICHTEXT",
+    "data": {
+      "heading": "",
+      "html": "<h5>2. Schwerpunkt</h5><h2>Auslastung &amp; Hundesport</h2><p>JEDER Hund hat das Recht artgerecht ausgelastet und gefördert zu werden. Früher hatten Hunde eine Aufgabe: Sie wurden u.a. bei der Jagd eingesetzt oder haben dem Schäfer bei dem Hüten der Schafherde unterstützt. Heutzutage werden Hunde meiner Ansicht nach viel zu selten geistig und körperlich gefördert. Dummyarbeit als Ersatz für den jagdlichen Einsatz nach dem Schuss oder hundesportliche Unterordnung für arbeitswillige Rassen. Es gibt viele Möglichkeiten dem Hund eine Aufgabe zu geben und zu fördern. Und genau diese gemeinsame Zeit zwischen Mensch und Hund wirkt wie Klebstoff für die Bindung. Im Bereich Gruppencoachings findest du alle Informationen zu aktuell laufenden Kursen aus den Bereichen Grunderziehung und Auslastung.</p><p><a href=\"/kontakt\">Jetzt Kontakt aufnehmen</a></p>"
+    }
+  },
+  {
+    "type": "RICHTEXT",
+    "data": {
+      "heading": "Über uns",
+      "html": "<h2>Das dynamische Trio</h2><p>Warum bin ich Hundetrainerin geworden? Die Antwort ist ganz einfach: weil ich es liebe. ich wollte schon immer einen Beruf ausüben, der mich begeistert und fasziniert. Und genau diesen Beruf habe ich mit dem Hundetraining gefunden. Aber was wäre ich ohne meine Hunde? Meine Hunde sind der Grund, warum ich überhaupt mit dem Hundetraining begonnen habe. Meine Hunde sind der Grund, warum ich meine Trainingsphilosophie und -methoden jeden Tag überdenke, reflektiere, umsetze und weiter ausbaue. Wenn man eigene Hunde hat, hört das Training nie auf. Und genau das lebe ich jeden Tag.</p><ul><li>Chiara: Hundetrainerin und Lehrerin</li><li>Emil: Troublemaker und Dampfwalze</li><li>Olaf: professioneller Lebensmittelverwerter</li></ul>"
+    }
+  },
+  {
+    "type": "GALLERY",
+    "data": {
+      "heading": "Social Media | YouTube",
+      "images": [
+        { "src": "/uploads/2025/05/Alltagstraining-yt-thumbnail.png", "alt": "Alltagstraining-yt-thumbnail" },
+        { "src": "/uploads/2025/05/Obedience-yt-thumbnail.png", "alt": "Obedience-yt-thumbnail" },
+        { "src": "/uploads/2025/05/Trickdog-yt-thumbnail.png", "alt": "Trickdog-yt-thumbnail" }
+      ]
+    }
+  },
+  {
+    "type": "CARDS",
+    "data": {
+      "heading": "Unsere Dienstleistung",
+      "intro": "Ich verhelfe dir und deinem Hund zu einem harmonischen Zusammenleben. Aber viele Wege führen nach Rom. Während einige Mensch-Hund-Teams zunächst Alltagsthemen nachhaltig lösen wollen oder die Grunderziehung an der ein oder anderen Stelle noch ausbaufähig ist, suchen andere Teams nach der perfekten Auslastung, die Hund und Mensch noch enger zusammenschweißt. Sprich mich gerne an. Wir finden bestimmte das passende Angebot für dich und deinen Hund.",
+      "cards": [
+        {
+          "title": "Einzelcoaching",
+          "text": "Der Weg der individuellen und intensivsten Betreuung, um nachhaltig Erfolge zu verzeichnen.",
+          "href": "/einzelcoaching"
+        },
+        {
+          "title": "Onlinecoaching",
+          "text": "Wo Präsenztraining an seine Grenzen kommt, beginnen die Möglichkeiten des Onlinetrainings.",
+          "href": "/onlinecoaching"
+        },
+        {
+          "title": "Gruppencoaching",
+          "text": "Die Arbeit in Kleingruppen ermöglicht ein intensives Arbeiten in der Anwesenheit von anderen Hunden.",
+          "href": "/gruppencoaching"
+        },
+        {
+          "title": "Social Walk",
+          "text": "Der Social Walk ist mehr als nur ein gemeinsamer Spaziergang mit anderen Hunden.",
+          "href": "/socialwalk"
+        }
+      ]
+    }
+  },
+  {
+    "type": "RICHTEXT",
+    "data": {
+      "heading": "Von nix kommt nix.",
+      "html": "<p>Unsere Preise im Überblick</p><h3>Einzelcoaching</h3><p>Einzelbetreuung</p><h4>ab 80 €</h4><p>pro Termin</p><ul><li>Leinenführigkeit</li><li>Rückruf</li><li>verhaltensauffällige Hunde</li><li>Hundebegegnungen</li><li>Grunderziehung</li></ul><p><a href=\"/einzelcoaching\">weitere Informationen</a></p><h3>Onlinecoaching</h3><p>Einzelbetreuung</p><h3>ab 20 €</h3><p>pro Termin</p><ul><li>Trickdog</li><li>Gegenstandssuche</li><li>alleine bleiben</li><li>offene Fragen klären</li><li>Analyse von Trainingsvideos</li></ul><p><a href=\"/onlinecoaching\">weitere Informationen</a></p><h3>Gruppencoaching</h3><p>Arbeit in Kleingruppen</p><h4>ab 20€</h4><p>pro Termin</p><ul><li>Alltagstraining</li><li>Obedience</li><li>Apportieren / Dummyarbeit</li><li>Nasenarbeit</li><li>Trickdog</li><li>uvm.</li></ul><p><a href=\"/gruppencoaching\">weitere Informationen</a></p><h3>Social Walk</h3><p>mehrere Teilnehmer</p><h3>ab 20 €</h3><p>pro Termin</p><ul><li>soziale Kompetenzen stärken</li><li>Frust aushalten</li><li>Impulse kontrollieren</li><li>Entspannung lernen</li></ul><p><a href=\"/socialwalk\">weitere Informationen</a></p>"
+    }
+  },
+  {
+    "type": "CTA",
+    "data": {
+      "heading": "hundsgescheit",
+      "text": "💥ganzheitliches Hundetraining für reaktive Hunde\n🧠 JEDER Hund hat das Recht auf artgerechte Auslastung\n📍Essen",
+      "cta": [
+        { "label": "Auf Instagram folgen", "href": "https://www.instagram.com/hundsgescheit/" }
+      ]
+    }
+  }
+]

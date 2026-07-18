@@ -1,0 +1,29 @@
+[
+  {
+    "type": "HERO",
+    "data": {
+      "headline": "Social Walk",
+      "subline": "Der Weg zum sozialkompetenten Hund",
+      "image": "",
+      "primary": [],
+      "secondary": []
+    }
+  },
+  {
+    "type": "RICHTEXT",
+    "data": {
+      "heading": "Social Walk",
+      "html": "<p>Der Social Walk ist ein gemeinsamer Spaziergang mit mehreren Hunden und deren Besitzern. Die Hunde sind in der Regel angeleint. Je nach Gruppenzusammensetzung ist Freilauf sowie Sozialkontakt in einem kontrolliertem Rahmen möglich. Solche Phasen werden immer von mir angeleitet, beobachtet und analysiert. Dein Hund lernt während des gemeinsamen Laufens die Anwesenheit von anderen Hunden zu akzeptieren. Das Laufen hilft deinem Hund den aufgestauten Stress abzubauen und in die Entspannung zu finden.  Eine tolles Lernsetting, insbesondere für reaktive, verhaltenskreative und/oder unverträgliche Hunde. Frustrationstoleranz und Impulskontrolle werden in diesem Setting geschult und soziale Kompetenzen ausgebaut. Und natürlich geht es nicht nur um deinen Hund. Beim Social Walk hast du die Möglichkeit, neue Kontakte zu knüpfen und anregende Gespräche mit anderen Hundehaltern zu führen.</p>\n<ul>\n<li>Wann? 1. und 3. Donnerstag im Monat, Start 18:00 Uhr</li>\n<li>Wie lange? 1 Std. 30 Min.</li>\n<li>Wie teuer? 20€ oder 11er-Karte (200€)</li>\n<li>Wo? an wechselnden Orten in Essen &amp; Umgebung</li>\n<li>Bezahlung: Bar, Kartenzahlung oder PayPal</li>\n<li>Stornierungsfrist ohne Gebühren: 48 Stunden vor dem Termin</li>\n</ul>"
+    }
+  },
+  {
+    "type": "CTA",
+    "data": {
+      "heading": "",
+      "text": "",
+      "cta": [
+        { "label": "Jetzt Kontakt aufnehmen", "href": "/kontakt" }
+      ]
+    }
+  }
+]

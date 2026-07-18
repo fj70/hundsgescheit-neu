@@ -1,0 +1,66 @@
+[
+  {
+    "type": "RICHTEXT",
+    "data": {
+      "heading": "Wenn Verstand auf Leidenschaft trifft",
+      "html": "<h2>Manche leben für die Freiheit, Andere für die Vernunft. Ich habe mich für die Freiheit entschieden.</h2><p>Aber zurück zum Anfang: Mein Name ist Chiara, ich bin 28 Jahre alt und meine Berufung ist das Hundetraining. Bevor ich \"auf den Hund gekommen bin\", habe ich Lehramt mit der Fächerkombi Mathe und Sport studiert und erfolgreich abgeschlossen. Getreu des Mottos: \"Mach was Vernünftiges Kind!\" habe ich mit dem Lehramtsstudium einen sicheren Berufsweg gewählt und mich von meinen Kopf leiten lassen. Kurz vor dem Referendariat habe ich den Mut gefunden die Reißleine zu ziehen, den Kopf auszuschalten und endlich meinem Herzen zu folgen. Und so bin ich hier gelandet: Willkommen in der Hundeschule Hundsgescheit - Hundetraining mit Herz und Verstand.</p>"
+    }
+  },
+  {
+    "type": "RICHTEXT",
+    "data": {
+      "heading": "Meine Qualifikationen:",
+      "html": "<ul><li>Hundetrainerausbildung Hundeschule Talisman Hunde(Halter)-Ausbildung</li><li>Zertifizierung Hundetrainer gemäß §11 Abs.1 Satz 1 Nr. 8f durch das Veterinäramt Essen</li><li>Sachkundebescheinigung gemäß §6 Abs.2 Landeshundegesetz NRW zum Führen von gefährlichen Hunden</li><li>zahlreiche Fortbildungen zu verschiedensten Bereichen des Hundetrainings</li><li>pädagogische Grundausbildung in Form eines abgeschlossenen Lehramtsstudiums</li><li>Begleithundeprüfung mit Olaf und Emil am 07.06.2026 bestanden</li></ul>"
+    }
+  },
+  {
+    "type": "RICHTEXT",
+    "data": {
+      "heading": "Die Quelle meiner Inspiration.",
+      "html": "<h2>Niemand ist ein besserer Lehrer als die eigenen Hunde.</h2><p>Immer an meiner Seite: Meine Hunde Olaf (Labrador Retriever, 6Jahre) und Emil (XHerder, 23Jahre). Olaf ist 2020 bei mir eingezogen, während ich meine Bachelorarbeit verfasst habe. Man könnte sagen, dass die Erziehung von Olaf meine Liebe für das Hundetraining entfacht hat. Zusammen haben wir den Beschäftigungs- und Auslastungssektor des Hundetrainings und insbesondere das Trickdog für uns entdeckt. 3 Jahre später (2023) durfte Emil bei mir einziehen, während ich meine Masterarbeit zum Thema Schulhundeausbildungen schrieb. Ziemlich schnell entpuppte sich Emil als ziemlich herausfordernder Charakter: mein kleiner Knallfrosch. Die Erziehung von Emil verlangt mir einiges ab. Reaktiv ist wohl das Stichwort, mit dem sich Emil am besten beschreiben lässt. Die Arbeit mit diesem kleinen Charakterkopf hat meine Leidenschaft für reaktive und impulsive Hunde  erweckt.</p>"
+    }
+  },
+  {
+    "type": "IMAGE_TEXT",
+    "data": {
+      "heading": "Unsere (sportlichen) Erfolge",
+      "html": "<h3>Begleithundeprüfung bestanden</h3><p>Die Begleithundeprüfung ist die Eintrittskarte in den Hundesport. Egal ob Agility, Hoopers, IGP (Internationaler Gebrauchshundesport) oder obedience. Sobald du mit deinem Hund an Prüfungen, Veranstaltungen und Wettkämpfen teilnehmen möchtest, wird in der Regel eine bestandene Begleithundeprüfung vorausgesetzt. Die Prüfung besteht aus zwei Teilen: der Unterordnung und dem Verkehrsteil. Die Unterordnung findet auf einem Hundeplatz statt. Dort musst du unter Beweis stellen, dass dein Hund einen zuverlässigen Grundgehorsam besitzt. Der Verkehrsteil findet, wie der Name schon sagt, in der Öffentlichkeit statt. Hier wird geprüft, wie dein Hund auf verschiedene Umweltreize reagiert. Dein Hund soll sich weder übermäßig ängstlich, noch aggressiv zeigen. Wenn dich das Thema Begleithundeprüfung interessiert und du mehr darüber erfahren willst, lies dir gerne weiter unten meinen Blogbeitrag zu dem Thema durch. Dort habe ich dir alle Inhalte und den Ablauf meiner Prüfung mit meinen Hunden genau geschildert. Und wenn du jetzt auch Lust hast die Begleithundeprüfung mit deinem Hund zu absolvieren, melde dich gerne über das Kontaktformular bei mir. Ich helfe dir bei der Prüfungsvorbereitung</p><p><a href=\"/kontakt\">Jetzt Kontakt aufnehmen</a></p>",
+      "image": "/uploads/2026/06/IMG_1747-768x1024.jpeg",
+      "imageAlt": "",
+      "imageSide": "left"
+    }
+  },
+  {
+    "type": "CARDS",
+    "data": {
+      "heading": "Unser Blog & tips",
+      "intro": "News & blog",
+      "cards": [
+        {
+          "title": "Begleithundepruefung – Wie viel sagt sie wirklich aus?",
+          "text": "Wie viel sagt sie wirklich über den Hund aus? Die Begleithundeprüfung ist für nahezu alle hundesportlichen Wettkämpfe, Ausstellungen und Veranstaltungen Pflicht. Dementsprechend ist die Prüfung",
+          "image": "/uploads/2026/06/bhp-bestanden-768x1024.jpg",
+          "href": "/blog/begleithundepruefung-wie-viel-sagt-sie-wirklich-aus"
+        },
+        {
+          "title": "Wie verbunden bist du mit deinem Hund?",
+          "text": "Und was hat das mit Beziehung und Partnerschaft zu tun? Ich sehe es immer wieder: Vier- und Zweibeiner leben nebeneinanderher. Dreimal pro Tag Gassi und",
+          "image": "/uploads/2026/06/verbundenheit-olaf-1024x683.jpg",
+          "href": "/blog/wie-verbunden-bist-du-mit-deinem-hund"
+        },
+        {
+          "title": "Woran erkennst du einen guten Hundetrainer?",
+          "text": "Wenn du einen Hundetrainer oder eine Hundetrainerin suchst, willst du sicher sein, dass du jemanden findest, der professionell arbeitet, dich ernst nimmt und dich sowie",
+          "image": "/uploads/2026/06/trainer-emil-olaf-1024x683.jpg",
+          "href": "/blog/woran-erkennst-du-einen-guten-hundetrainer"
+        },
+        {
+          "title": "Ich habe Angst – ich mache es trotzdem",
+          "text": "Was Hundetraining mit Mut, Sicherheit und Mindset zu tun hat Ich habe vor einiger Zeit einen Satz gehört, der mich nicht mehr losgelassen hat. Eine",
+          "image": "/uploads/2026/06/angst-emil-1024x683.jpg",
+          "href": "/blog/ich-habe-angst-ich-mache-es-trotzdem"
+        }
+      ]
+    }
+  }
+]

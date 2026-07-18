@@ -16,6 +16,23 @@ function blogHtml(slug: string): string {
   }
 }
 
+// 1:1-Seiteninhalte: bevorzugt aus prisma/seed-content/pages/<slug>.json laden
+// (wortgetreu aus WP extrahiert). Fehlt die Datei -> null -> hartcodierter Fallback.
+function sectionsFromJson(slug: string): { type: string; order: number; data: string }[] | null {
+  try {
+    const raw = readFileSync(join(CONTENT, "pages", `${slug}.json`), "utf8");
+    const arr = JSON.parse(raw);
+    if (!Array.isArray(arr) || arr.length === 0) return null;
+    return arr.map((s: { type: string; data?: unknown }, i: number) => ({
+      type: s.type,
+      order: i,
+      data: JSON.stringify(s.data ?? {}),
+    }));
+  } catch {
+    return null;
+  }
+}
+
 // Kleine Helfer zum Bauen von Sektionen
 let sortCounter = 0;
 function section(type: string, data: Record<string, unknown>) {
@@ -260,12 +277,14 @@ async function main() {
     sections: { type: string; order: number; data: string }[];
   }) {
     const { sections: secs, ...rest } = opts;
+    // 1:1-Inhalte aus JSON bevorzugen, sonst hartcodierter Fallback.
+    const finalSecs = sectionsFromJson(opts.slug) ?? secs;
     await db.page.create({
       data: {
         ...rest,
         showInNav: opts.showInNav ?? true,
         isSystem: opts.isSystem ?? false,
-        sections: { create: secs },
+        sections: { create: finalSecs },
       },
     });
   }

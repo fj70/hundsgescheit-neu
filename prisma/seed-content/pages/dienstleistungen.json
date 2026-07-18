@@ -1,0 +1,38 @@
+[
+  {
+    "type": "RICHTEXT",
+    "data": {
+      "heading": "Meine Expertise",
+      "html": "<h2>Auslastung &amp; Reaktivität</h2>\n<p>Meine eigenen Hunde sind meine größte Inspiration. Wenn ich mit meinen Hunden arbeite, vergesse ich alles um mich herum. Ich lebe komplett im Moment und genieße das Gefühl der engen Verbindung zwischen Mensch und Tier, während wir auf ein gemeinsames Ziel hinarbeiten. Ebenso fasziniert mich die Arbeit mit reaktiven Hunden: Hunde, die auf verschiedenste Reize impulsiv reagieren, in die Leine springen, bellen, nicht mehr ansprechbar sind und ggf. sogar zubeißen würden. Mein eigener Hund Emil ist einer dieser Exemplare, der seine Impulse eher mäßig unter Kontrolle hat. Genetik lügt nicht. Wenn du einen solchen Hund hast, möchte ich dir etwas mit auf den Weg geben: Du bist kein schlechter Hundebesitzer, weil dein Hund so ist, wie er ist. Ich weiß, wie du dich fühlst, denn ich habe das gleiche mit meinem eigenen Hund durchlebt. Und lass mich dir eines sagen:  Es wird besser. Jeden Tag. Ein kleines bisschen. Und irgendwann guckst du dir deinen Hund an und bist unfassbar stolz auf den extrem steinigen Weg, den ihr gemeinsam als Team bestritten habt. Auf diesem Weg würde ich euch gerne begleiten und unterstützen.</p>"
+    }
+  },
+  {
+    "type": "CARDS",
+    "data": {
+      "heading": "",
+      "intro": "",
+      "cards": [
+        {
+          "title": "Einzelcoaching",
+          "text": "Beim Einzelcoaching betreue ich dich individuell und wir arbeiten intensiv an euren Themen. Der perfekte Weg, wenn du nachhaltig Erfolge erzielen möchtest. Ort und Zeit passe ich an deine Wünsche an.",
+          "href": "/einzelcoaching"
+        },
+        {
+          "title": "Onlinecoaching",
+          "text": "Egal ob beim Aufbau eines neuen Tricks oder beim Üben des Alleine bleiben: Das Onlinecoaching bietet erfolgsversprechende Trainingsmöglichkeiten, wo das Präsenztraining an seine Grenzen kommt.",
+          "href": "/onlinecoaching"
+        },
+        {
+          "title": "Gruppencoaching",
+          "text": "Egal ob  Alltagstraining, Grunderziehung, Vorbereitung auf die Begleithundeprüfung oder Beschäftigung und Auslastung mit deinem Hund: Beim Gruppencoaching ist für jedes Mensch-Hund-Team das passende Angebot dabei.",
+          "href": "/gruppencoaching"
+        },
+        {
+          "title": "Social Walk",
+          "text": "Das angeleitete Spazieren gehen mit anderen Hunden schult die sozialen Kompetenzen deines Vierbeiners. Dein Hund lernt Frust auszuhalten, Impulse zu kontrollieren und in Gegenwart von anderen Hunden zu entspannen.",
+          "href": "/socialwalk"
+        }
+      ]
+    }
+  }
+]
