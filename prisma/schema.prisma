@@ -1,0 +1,179 @@
+// hundsgescheit.de — Datenmodell
+// CMS (Seiten/Sektionen/Medien/Blog) + Buchungssystem (Kurse/Termine/Buchungen) + Nutzer.
+// SQLite lokal; migrierbar zu MySQL (dann provider wechseln). SQLite kann keine Prisma-Enums
+// -> Statusfelder sind Strings mit dokumentierten erlaubten Werten.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+// ---------- Nutzer / Auth ----------
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         String   @default("ADMIN") // OWNER | ADMIN
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// ---------- CMS: Seiten & flexible Sektionen ----------
+model Page {
+  id              String    @id @default(cuid())
+  slug            String    @unique
+  title           String
+  isPublished     Boolean   @default(true)
+  isSystem        Boolean   @default(false) // Kernseiten, nicht loeschbar
+  order           Int       @default(0)
+  showInNav       Boolean   @default(true)
+  navLabel        String? // abweichendes Label in der Navigation
+  metaTitle       String?
+  metaDescription String?
+  sections        Section[]
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+// Ein Abschnitt auf einer Seite. `type` bestimmt das Layout, `data` (JSON) den Inhalt.
+// So kann die Kundin Abschnitte hinzufuegen, umsortieren, Texte/Bilder aendern.
+model Section {
+  id        String   @id @default(cuid())
+  page      Page     @relation(fields: [pageId], references: [id], onDelete: Cascade)
+  pageId    String
+  type      String // HERO | RICHTEXT | IMAGE_TEXT | IMAGE | CTA | CARDS | GALLERY | TESTIMONIALS | FAQ | COURSES | CONTACT | STEPS | STATS
+  order     Int      @default(0)
+  isVisible Boolean  @default(true)
+  data      String   @default("{}") // JSON-String mit den Feldern des jeweiligen Typs
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([pageId, order])
+}
+
+// ---------- Medienbibliothek ----------
+model MediaAsset {
+  id        String   @id @default(cuid())
+  filename  String
+  path      String // oeffentlicher Pfad, z.B. /uploads/2026/foo.jpg
+  alt       String   @default("")
+  title     String   @default("")
+  width     Int?
+  height    Int?
+  mimeType  String   @default("image/jpeg")
+  size      Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+// ---------- Blog ----------
+model Category {
+  id    String @id @default(cuid())
+  name  String
+  slug  String @unique
+  posts Post[]
+}
+
+model Post {
+  id              String    @id @default(cuid())
+  slug            String    @unique
+  title           String
+  excerpt         String    @default("")
+  contentHtml     String    @default("")
+  coverImagePath  String?
+  coverImageAlt   String    @default("")
+  status          String    @default("DRAFT") // DRAFT | PUBLISHED
+  publishedAt     DateTime?
+  metaTitle       String?
+  metaDescription String?
+  category        Category? @relation(fields: [categoryId], references: [id])
+  categoryId      String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@index([status, publishedAt])
+}
+
+// ---------- Buchungssystem ----------
+// Kursart/Angebot (Einzelcoaching, Gruppencoaching, Onlinecoaching, Socialwalk ...)
+model Course {
+  id              String          @id @default(cuid())
+  slug            String          @unique
+  title           String
+  shortDesc       String          @default("")
+  description     String          @default("")
+  type            String          @default("GRUPPE") // EINZEL | GRUPPE | ONLINE | SOCIALWALK
+  durationMin     Int             @default(60)
+  price           Int             @default(0) // in Cent
+  priceLabel      String          @default("") // freie Preisangabe, z.B. "ab 45 €"
+  capacity        Int             @default(6) // Standard-Plaetze pro Termin
+  location        String          @default("")
+  imagePath       String?
+  color           String          @default("#7BA05B") // Farbe im Kundin-Kalender
+  isActive        Boolean         @default(true)
+  isBookable      Boolean         @default(true)
+  order           Int             @default(0)
+  metaTitle       String?
+  metaDescription String?
+  sessions        CourseSession[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+}
+
+// Konkreter Termin eines Kurses
+model CourseSession {
+  id        String    @id @default(cuid())
+  course    Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId  String
+  startsAt  DateTime
+  endsAt    DateTime
+  capacity  Int // Plaetze fuer diesen Termin (Default vom Kurs uebernommen)
+  location  String    @default("")
+  note      String    @default("")
+  status    String    @default("SCHEDULED") // SCHEDULED | CANCELLED | DONE
+  bookings  Booking[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@index([startsAt])
+}
+
+model Booking {
+  id            String        @id @default(cuid())
+  session       CourseSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  sessionId     String
+  customerName  String
+  customerEmail String
+  customerPhone String        @default("")
+  dogName       String        @default("")
+  people        Int           @default(1)
+  notes         String        @default("")
+  status        String        @default("PENDING") // PENDING | CONFIRMED | CANCELLED
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([sessionId])
+  @@index([status])
+}
+
+// ---------- Kontaktanfragen ----------
+model Enquiry {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String   @default("")
+  subject   String   @default("")
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+// ---------- Globale Einstellungen (Kontakt, Oeffnungszeiten, SEO, LocalBusiness) ----------
+model Setting {
+  key   String @id
+  value String @default("")
+}
