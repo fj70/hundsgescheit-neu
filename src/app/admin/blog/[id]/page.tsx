@@ -2,11 +2,16 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
 import { PostEditor } from "@/components/admin/PostEditor";
+import { getSettings, colorPalette } from "@/lib/settings";
 
 export default async function BlogEditor({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const post = await db.post.findUnique({ where: { id } });
+  const [post, settings] = await Promise.all([
+    db.post.findUnique({ where: { id } }),
+    getSettings(),
+  ]);
   if (!post) notFound();
+  const palette = colorPalette(settings).map((c) => ({ name: c.name, color: c.color }));
 
   return (
     <div>
@@ -25,6 +30,7 @@ export default async function BlogEditor({ params }: { params: Promise<{ id: str
             metaDescription: post.metaDescription,
             status: post.status,
           }}
+          palette={palette}
         />
       </div>
     </div>

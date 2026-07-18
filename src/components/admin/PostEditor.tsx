@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ImagePicker } from "./ImagePicker";
+import { RichTextEditor, type Swatch } from "./RichTextEditor";
 import { updatePost, deletePost } from "@/app/admin/actions";
 
 type Post = {
@@ -18,8 +19,9 @@ type Post = {
 
 const input = "w-full rounded-lg border bg-white px-3 py-2 text-sm outline-none focus:border-primary";
 
-export function PostEditor({ post }: { post: Post }) {
+export function PostEditor({ post, palette = [] }: { post: Post; palette?: Swatch[] }) {
   const [cover, setCover] = useState(post.coverImagePath ?? "");
+  const [content, setContent] = useState(post.contentHtml ?? "");
   const [status, setStatus] = useState(post.status);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -29,6 +31,7 @@ export function PostEditor({ post }: { post: Post }) {
     const fd = new FormData(form);
     fd.set("id", post.id);
     fd.set("coverImagePath", cover);
+    fd.set("contentHtml", content);
     fd.set("status", publish ? "PUBLISHED" : "DRAFT");
     await updatePost(fd);
     setStatus(publish ? "PUBLISHED" : "DRAFT");
@@ -62,8 +65,7 @@ export function PostEditor({ post }: { post: Post }) {
       </div>
       <div>
         <label className="mb-1 block text-sm font-medium">Inhalt</label>
-        <p className="mb-1 text-xs text-muted">Einfaches HTML: &lt;h2&gt;Überschrift&lt;/h2&gt;, &lt;p&gt;Absatz&lt;/p&gt;, &lt;ul&gt;&lt;li&gt;Liste&lt;/li&gt;&lt;/ul&gt;</p>
-        <textarea name="contentHtml" rows={16} defaultValue={post.contentHtml} className={`${input} font-mono text-xs`} />
+        <RichTextEditor value={content} onChange={setContent} palette={palette} />
       </div>
       <details className="rounded-lg border bg-soft-2/40 p-4">
         <summary className="cursor-pointer text-sm font-medium">SEO (optional)</summary>

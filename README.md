@@ -1,36 +1,55 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# hundsgescheit.de – Neubau (Next.js)
 
-## Getting Started
+Eigenständiger Nachbau von hundsgescheit.de mit eigenem CMS, Buchungssystem und Kundin-Dashboard.
+Ersetzt die bisherige WordPress-Seite. Design 1:1 zum Original (Petrol/Blau, Bowlby One SC /
+Outfit / Fuzzy Bubbles).
 
-First, run the development server:
+## Stack
+- **Next.js 16** (App Router, Turbopack, Standalone-Output)
+- **TypeScript + Tailwind v4**
+- **Prisma 7 + SQLite** (better-sqlite3 Adapter) – migrierbar zu MySQL
+- **Auth**: eigene Session (JWT via jose, bcrypt), geschützt über `src/proxy.ts`
 
+## Lokal starten
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npx prisma migrate dev      # DB anlegen
+npx tsx prisma/seed.ts      # Demo-Inhalte + Kurse + Termine
+npm run dev                 # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Logins (Verwaltung unter /admin)
+- **Chiara (OWNER):** chiara@hundsgescheit.de / `hundsgescheit2026`
+- **FJ (ADMIN):** admin@fjdesign.de / `fjdesign2026`
+> Passwörter nach dem ersten Login ändern. In Produktion via `SEED_OWNER_PASSWORD` /
+> `SEED_ADMIN_PASSWORD` (Build-Zeit-Env) setzen.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Architektur (Kurz)
+- **Öffentliche Seiten** kommen aus der DB: `Page` → `Section[]`. Der `SectionRenderer`
+  (`src/components/sections/`) rendert 13 Sektionstypen (HERO, CARDS, IMAGE_TEXT, COURSES,
+  CONTACT, FAQ, …). Neue Abschnitte fügt die Kundin im Admin hinzu.
+- **Sektions-Schema** in `src/lib/sections.ts` treibt den generischen Editor (`SectionEditor`).
+- **Buchung**: `Course` → `CourseSession` (Termin) → `Booking`. Öffentlich unter `/termine`,
+  Verwaltung unter `/admin/termine`.
+- **Blog**: `Post` (+ `Category`), Editor unter `/admin/blog`.
+- **Medien**: Upload nach `public/uploads/cms` über `/api/upload`, Bibliothek unter `/admin/medien`.
+- **SEO/GEO**: `sitemap.ts`, `robots.ts`, LocalBusiness-JSON-LD (`src/components/seo/`),
+  Per-Page-Metadata, deutsche lokale Keywords (Essen).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Deploy (Coolify)
+- `Dockerfile` (Multi-Stage, Standalone) + `docker-entrypoint.sh`.
+- DB wird **zur Build-Zeit** geseedet (`prisma/seed-content/`) und beim ersten Start aufs
+  Volume kopiert. **Ohne** gemountetes `/app/data`-Volume startet die Seite bei jedem Deploy
+  frisch mit den Demo-Inhalten (gewollt für die Test-Subdomain).
+- Für **echten** Betrieb: Volume auf `/app/data` (DB) **und** `/app/public/uploads/cms`
+  (Uploads) mounten, damit Änderungen/Buchungen persistent sind.
+- Env: `AUTH_SECRET`, `SITE_URL`. Optional Build-Zeit: `SEED_OWNER_PASSWORD`, `SEED_ADMIN_PASSWORD`.
 
-## Learn More
+## Bilder
+`public/uploads` enthält nur die auf der Seite referenzierten Fotos (schlank für Git).
+Die vollständige Bildbibliothek liegt lokal unter `../wp-content-full/uploads` und kann bei
+Bedarf ins Uploads-Volume gespielt werden.
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Migration zu MySQL (später)
+`provider = "mysql"` in `prisma/schema.prisma`, `DATABASE_URL` auf MySQL, `prisma migrate`.
+Statusfelder sind bereits Strings (SQLite-kompatibel), daher problemlos portierbar.

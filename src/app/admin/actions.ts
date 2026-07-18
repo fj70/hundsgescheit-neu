@@ -266,6 +266,7 @@ export async function saveSettings(formData: FormData) {
     "siteName", "tagline", "email", "phone", "street", "zip", "city", "region",
     "country", "lat", "lng", "openingHours", "instagram", "facebook",
     "metaTitleDefault", "metaDescriptionDefault",
+    "colorPrimary", "colorSecondary", "colorAccent", "colorNavy",
   ];
   await Promise.all(
     keys.map((k) =>

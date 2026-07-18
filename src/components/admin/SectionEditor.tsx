@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { SECTION_TYPE_MAP, type FieldDef } from "@/lib/sections";
 import { ImagePicker } from "./ImagePicker";
+import { RichTextEditor, type Swatch } from "./RichTextEditor";
 import { updateSection } from "@/app/admin/actions";
 
 type Data = Record<string, unknown>;
@@ -13,10 +14,12 @@ function FieldInput({
   def,
   value,
   onChange,
+  palette,
 }: {
   def: FieldDef;
   value: unknown;
   onChange: (v: unknown) => void;
+  palette: Swatch[];
 }) {
   switch (def.type) {
     case "text":
@@ -24,15 +27,7 @@ function FieldInput({
     case "textarea":
       return <textarea rows={3} className={input} value={String(value ?? "")} onChange={(e) => onChange(e.target.value)} />;
     case "richtext":
-      return (
-        <textarea
-          rows={8}
-          className={`${input} font-mono text-xs`}
-          value={String(value ?? "")}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder="<p>Text mit einfachem HTML …</p>"
-        />
-      );
+      return <RichTextEditor value={String(value ?? "")} onChange={onChange} palette={palette} />;
     case "image":
       return <ImagePicker value={String(value ?? "")} onChange={onChange} />;
     case "select":
@@ -74,7 +69,7 @@ function FieldInput({
                 {def.itemFields?.map((f) => (
                   <div key={f.key}>
                     <label className="mb-1 block text-xs text-muted">{f.label}</label>
-                    <FieldInput def={f} value={it[f.key]} onChange={(v) => update(i, f.key, v)} />
+                    <FieldInput def={f} value={it[f.key]} onChange={(v) => update(i, f.key, v)} palette={palette} />
                   </div>
                 ))}
               </div>
@@ -93,8 +88,10 @@ function FieldInput({
 
 export function SectionEditor({
   section,
+  palette = [],
 }: {
   section: { id: string; pageId: string; type: string; data: string };
+  palette?: Swatch[];
 }) {
   const def = SECTION_TYPE_MAP[section.type];
   const [data, setData] = useState<Data>(() => {
@@ -127,7 +124,7 @@ export function SectionEditor({
         <div key={f.key}>
           <label className="mb-1 block text-sm font-medium">{f.label}</label>
           {f.help && <p className="mb-1 text-xs text-muted">{f.help}</p>}
-          <FieldInput def={f} value={data[f.key]} onChange={(v) => setData({ ...data, [f.key]: v })} />
+          <FieldInput def={f} value={data[f.key]} onChange={(v) => setData({ ...data, [f.key]: v })} palette={palette} />
         </div>
       ))}
       <div className="flex items-center gap-3">
