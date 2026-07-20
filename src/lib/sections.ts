@@ -87,7 +87,7 @@ export const SECTION_TYPES: SectionTypeDef[] = [
   {
     type: "CARDS",
     label: "Karten (Angebote/Leistungen)",
-    description: "Mehrere Karten mit Bild, Titel, Text und Link — ideal für Angebote.",
+    description: "Mehrere Karten mit Titel, Text und Link — optional farbig (Angebotskacheln).",
     fields: [
       { key: "heading", label: "Überschrift", type: "text" },
       { key: "intro", label: "Einleitung", type: "textarea" },
@@ -98,12 +98,58 @@ export const SECTION_TYPES: SectionTypeDef[] = [
         itemFields: [
           { key: "title", label: "Titel", type: "text" },
           { key: "text", label: "Text", type: "textarea" },
-          { key: "image", label: "Bild", type: "image" },
+          { key: "image", label: "Bild (optional)", type: "image" },
           { key: "href", label: "Link", type: "text" },
+          {
+            key: "color",
+            label: "Farbe (für farbige Kachel)",
+            type: "select",
+            options: [
+              { value: "", label: "— keine (weiße Karte) —" },
+              { value: "einzel", label: "Grün (Einzelcoaching)" },
+              { value: "online", label: "Navy (Onlinecoaching)" },
+              { value: "gruppe", label: "Gold (Gruppencoaching)" },
+              { value: "social", label: "Braun (Social Walk)" },
+            ],
+          },
         ],
       },
     ],
     defaultData: { heading: "Meine Angebote", intro: "", cards: [] },
+  },
+  {
+    type: "PRICING",
+    label: "Preis-Karten",
+    description: "Farbige Preiskarten nebeneinander (Titel, Preis, Leistungs-Liste, Button).",
+    fields: [
+      { key: "eyebrow", label: "Kleine Zeile oben", type: "text" },
+      { key: "heading", label: "Überschrift", type: "text" },
+      {
+        key: "cards",
+        label: "Preiskarten",
+        type: "list",
+        itemFields: [
+          { key: "title", label: "Titel", type: "text" },
+          { key: "subtitle", label: "Untertitel", type: "text" },
+          { key: "price", label: "Preis (z. B. ab 20 €)", type: "text" },
+          { key: "priceNote", label: "Preis-Zusatz (z. B. pro Termin)", type: "text" },
+          { key: "features", label: "Leistungen (eine pro Zeile)", type: "textarea" },
+          { key: "href", label: "Button-Ziel", type: "text" },
+          {
+            key: "color",
+            label: "Farbe",
+            type: "select",
+            options: [
+              { value: "einzel", label: "Grün (Einzelcoaching)" },
+              { value: "online", label: "Navy (Onlinecoaching)" },
+              { value: "gruppe", label: "Gold (Gruppencoaching)" },
+              { value: "social", label: "Braun (Social Walk)" },
+            ],
+          },
+        ],
+      },
+    ],
+    defaultData: { eyebrow: "Von nix kommt nix.", heading: "Unsere Preise im Überblick", cards: [] },
   },
   {
     type: "STEPS",

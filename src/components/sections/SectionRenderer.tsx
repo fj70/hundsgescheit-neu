@@ -8,6 +8,23 @@ import { ContactSection } from "./ContactSection";
 
 type SectionRow = { id: string; type: string; data: string; isVisible: boolean };
 
+// Signaturfarben je Coaching-Art (wie im Original: Grün/Navy/Gold/Braun)
+const COACH_COLORS: Record<string, string> = {
+  einzel: "#2f6b43",
+  online: "#123a63",
+  gruppe: "#b0870f",
+  social: "#6f3e12",
+};
+
+// Einfaches Pfoten-Icon für farbige Kacheln
+function PawIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" className={className} aria-hidden>
+      <path d="M8.5 5.5a1.8 1.8 0 1 1-3.6 0 1.8 1.8 0 0 1 3.6 0Zm10.6 0a1.8 1.8 0 1 1-3.6 0 1.8 1.8 0 0 1 3.6 0ZM5.2 10.9a1.7 1.7 0 1 1-3.4 0 1.7 1.7 0 0 1 3.4 0Zm17 0a1.7 1.7 0 1 1-3.4 0 1.7 1.7 0 0 1 3.4 0ZM12 11.4c2.3 0 4.6 2.6 4.6 4.7 0 1.6-1.3 2.2-2.6 2.2-1 0-1.4-.4-2-.4s-1 .4-2 .4c-1.3 0-2.6-.6-2.6-2.2 0-2.1 2.3-4.7 4.6-4.7Z" />
+    </svg>
+  );
+}
+
 function s(d: Record<string, unknown>, k: string, fb = ""): string {
   const v = d[k];
   return typeof v === "string" ? v : fb;
@@ -133,6 +150,28 @@ function SingleSection({ section, altBg }: { section: SectionRow; altBg: boolean
               {cards.map((c, i) => {
                 const href = typeof c.href === "string" ? c.href : "";
                 const img = typeof c.image === "string" ? c.image : "";
+                const color = typeof c.color === "string" ? COACH_COLORS[c.color] : undefined;
+
+                // Farbige Angebotskachel (wie im Original)
+                if (color) {
+                  const inner = (
+                    <div
+                      className="group flex h-full flex-col items-center rounded-[24px] p-7 text-center text-white shadow-md transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                      style={{ backgroundColor: color }}
+                    >
+                      <PawIcon className="h-10 w-10 text-white/85" />
+                      <h3 className="mt-4 font-[family-name:var(--font-heading)] text-lg">{String(c.title ?? "")}</h3>
+                      <p className="mt-2 flex-1 text-sm leading-relaxed text-white/85">{String(c.text ?? "")}</p>
+                      {href && (
+                        <span className="mt-5 rounded-full bg-white/15 px-5 py-2 text-sm font-semibold ring-1 ring-white/30 transition-colors group-hover:bg-white/25">
+                          {String(c.title ?? "Mehr")}
+                        </span>
+                      )}
+                    </div>
+                  );
+                  return href ? <Link key={i} href={href}>{inner}</Link> : <div key={i}>{inner}</div>;
+                }
+
                 const inner = (
                   <div className="group flex h-full flex-col overflow-hidden rounded-[24px] border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
                     {img ? (
@@ -270,6 +309,65 @@ function SingleSection({ section, altBg }: { section: SectionRow; altBg: boolean
                 {s(d, "text") && <p className="mx-auto mt-4 max-w-xl text-white/85">{s(d, "text")}</p>}
                 {cta && <ButtonLink href={cta.href} size="lg" variant="accent" className="mt-8">{cta.label}</ButtonLink>}
               </div>
+            </div>
+          </Container>
+        </section>
+      );
+    }
+
+    case "PRICING": {
+      const cards = arr(d, "cards");
+      return (
+        <section className="bg-soft py-20">
+          <Container>
+            {s(d, "eyebrow") && (
+              <p className="text-center font-[family-name:var(--font-hand)] text-xl text-secondary">{s(d, "eyebrow")}</p>
+            )}
+            {s(d, "heading") && (
+              <h2 className="mt-1 text-center font-[family-name:var(--font-heading)] text-3xl text-navy sm:text-4xl">{s(d, "heading")}</h2>
+            )}
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {cards.map((c, i) => {
+                const color = typeof c.color === "string" ? COACH_COLORS[c.color] ?? "#125a70" : "#125a70";
+                const href = typeof c.href === "string" ? c.href : "";
+                const featuresRaw = typeof c.features === "string" ? c.features : "";
+                const features = featuresRaw.split(/\r?\n/).map((f) => f.trim()).filter(Boolean);
+                return (
+                  <div
+                    key={i}
+                    className="flex flex-col rounded-[24px] p-7 text-white shadow-lg transition-transform duration-300 hover:-translate-y-1"
+                    style={{ backgroundColor: color }}
+                  >
+                    <h3 className="font-[family-name:var(--font-heading)] text-xl">{String(c.title ?? "")}</h3>
+                    {s(c as Record<string, unknown>, "subtitle") && (
+                      <p className="mt-1 text-sm text-white/75">{String(c.subtitle ?? "")}</p>
+                    )}
+                    <div className="mt-5">
+                      <span className="font-[family-name:var(--font-heading)] text-3xl">{String(c.price ?? "")}</span>
+                      {s(c as Record<string, unknown>, "priceNote") && (
+                        <div className="text-sm text-white/70">{String(c.priceNote ?? "")}</div>
+                      )}
+                    </div>
+                    <ul className="mt-5 flex-1 space-y-2 text-sm">
+                      {features.map((f, j) => (
+                        <li key={j} className="flex items-start gap-2">
+                          <span className="mt-1 text-white/90" aria-hidden>✓</span>
+                          <span className="text-white/90">{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    {href && (
+                      <Link
+                        href={href}
+                        className="mt-6 rounded-full bg-white px-5 py-2.5 text-center text-sm font-semibold shadow-sm transition-transform hover:scale-[1.02]"
+                        style={{ color }}
+                      >
+                        weitere Informationen
+                      </Link>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </Container>
         </section>

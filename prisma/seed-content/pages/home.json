@@ -49,9 +49,18 @@
     "data": {
       "heading": "Social Media | YouTube",
       "images": [
-        { "src": "/uploads/2025/05/Alltagstraining-yt-thumbnail.png", "alt": "Alltagstraining-yt-thumbnail" },
-        { "src": "/uploads/2025/05/Obedience-yt-thumbnail.png", "alt": "Obedience-yt-thumbnail" },
-        { "src": "/uploads/2025/05/Trickdog-yt-thumbnail.png", "alt": "Trickdog-yt-thumbnail" }
+        {
+          "src": "/uploads/2025/05/Alltagstraining-yt-thumbnail.png",
+          "alt": "Alltagstraining-yt-thumbnail"
+        },
+        {
+          "src": "/uploads/2025/05/Obedience-yt-thumbnail.png",
+          "alt": "Obedience-yt-thumbnail"
+        },
+        {
+          "src": "/uploads/2025/05/Trickdog-yt-thumbnail.png",
+          "alt": "Trickdog-yt-thumbnail"
+        }
       ]
     }
   },
@@ -64,31 +73,77 @@
         {
           "title": "Einzelcoaching",
           "text": "Der Weg der individuellen und intensivsten Betreuung, um nachhaltig Erfolge zu verzeichnen.",
-          "href": "/einzelcoaching"
+          "href": "/einzelcoaching",
+          "color": "einzel",
+          "image": ""
         },
         {
           "title": "Onlinecoaching",
           "text": "Wo Präsenztraining an seine Grenzen kommt, beginnen die Möglichkeiten des Onlinetrainings.",
-          "href": "/onlinecoaching"
+          "href": "/onlinecoaching",
+          "color": "online",
+          "image": ""
         },
         {
           "title": "Gruppencoaching",
           "text": "Die Arbeit in Kleingruppen ermöglicht ein intensives Arbeiten in der Anwesenheit von anderen Hunden.",
-          "href": "/gruppencoaching"
+          "href": "/gruppencoaching",
+          "color": "gruppe",
+          "image": ""
         },
         {
           "title": "Social Walk",
           "text": "Der Social Walk ist mehr als nur ein gemeinsamer Spaziergang mit anderen Hunden.",
-          "href": "/socialwalk"
+          "href": "/socialwalk",
+          "color": "social",
+          "image": ""
         }
       ]
     }
   },
   {
-    "type": "RICHTEXT",
+    "type": "PRICING",
     "data": {
-      "heading": "Von nix kommt nix.",
-      "html": "<p>Unsere Preise im Überblick</p><h3>Einzelcoaching</h3><p>Einzelbetreuung</p><h4>ab 80 €</h4><p>pro Termin</p><ul><li>Leinenführigkeit</li><li>Rückruf</li><li>verhaltensauffällige Hunde</li><li>Hundebegegnungen</li><li>Grunderziehung</li></ul><p><a href=\"/einzelcoaching\">weitere Informationen</a></p><h3>Onlinecoaching</h3><p>Einzelbetreuung</p><h3>ab 20 €</h3><p>pro Termin</p><ul><li>Trickdog</li><li>Gegenstandssuche</li><li>alleine bleiben</li><li>offene Fragen klären</li><li>Analyse von Trainingsvideos</li></ul><p><a href=\"/onlinecoaching\">weitere Informationen</a></p><h3>Gruppencoaching</h3><p>Arbeit in Kleingruppen</p><h4>ab 20€</h4><p>pro Termin</p><ul><li>Alltagstraining</li><li>Obedience</li><li>Apportieren / Dummyarbeit</li><li>Nasenarbeit</li><li>Trickdog</li><li>uvm.</li></ul><p><a href=\"/gruppencoaching\">weitere Informationen</a></p><h3>Social Walk</h3><p>mehrere Teilnehmer</p><h3>ab 20 €</h3><p>pro Termin</p><ul><li>soziale Kompetenzen stärken</li><li>Frust aushalten</li><li>Impulse kontrollieren</li><li>Entspannung lernen</li></ul><p><a href=\"/socialwalk\">weitere Informationen</a></p>"
+      "eyebrow": "Von nix kommt nix.",
+      "heading": "Unsere Preise im Überblick",
+      "cards": [
+        {
+          "title": "Einzelcoaching",
+          "subtitle": "Einzelbetreuung",
+          "price": "ab 80 €",
+          "priceNote": "pro Termin",
+          "features": "Leinenführigkeit\nRückruf\nverhaltensauffällige Hunde\nHundebegegnungen\nGrunderziehung",
+          "href": "/einzelcoaching",
+          "color": "einzel"
+        },
+        {
+          "title": "Onlinecoaching",
+          "subtitle": "Einzelbetreuung",
+          "price": "ab 20 €",
+          "priceNote": "pro Termin",
+          "features": "Trickdog\nGegenstandssuche\nalleine bleiben\noffene Fragen klären\nAnalyse von Trainingsvideos",
+          "href": "/onlinecoaching",
+          "color": "online"
+        },
+        {
+          "title": "Gruppencoaching",
+          "subtitle": "Arbeit in Kleingruppen",
+          "price": "ab 20€",
+          "priceNote": "pro Termin",
+          "features": "Alltagstraining\nObedience\nApportieren / Dummyarbeit\nNasenarbeit\nTrickdog\nuvm.",
+          "href": "/gruppencoaching",
+          "color": "gruppe"
+        },
+        {
+          "title": "Social Walk",
+          "subtitle": "mehrere Teilnehmer",
+          "price": "ab 20 €",
+          "priceNote": "pro Termin",
+          "features": "soziale Kompetenzen stärken\nFrust aushalten\nImpulse kontrollieren\nEntspannung lernen",
+          "href": "/socialwalk",
+          "color": "social"
+        }
+      ]
     }
   },
   {
@@ -97,7 +152,10 @@
       "heading": "hundsgescheit",
       "text": "💥ganzheitliches Hundetraining für reaktive Hunde\n🧠 JEDER Hund hat das Recht auf artgerechte Auslastung\n📍Essen",
       "cta": [
-        { "label": "Auf Instagram folgen", "href": "https://www.instagram.com/hundsgescheit/" }
+        {
+          "label": "Auf Instagram folgen",
+          "href": "https://www.instagram.com/hundsgescheit/"
+        }
       ]
     }
   }

@@ -46,6 +46,18 @@ export async function submitContact(_prev: FormState, formData: FormData): Promi
   return { ok: true };
 }
 
+// ---------- Newsletter-Anmeldung ----------
+export async function subscribeNewsletter(_prev: FormState, formData: FormData): Promise<FormState> {
+  const email = String(formData.get("email") || "").trim();
+  if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    return { ok: false, error: "Bitte gültige E-Mail angeben." };
+  }
+  await db.enquiry.create({
+    data: { name: "Newsletter", email, subject: "Newsletter-Anmeldung", message: "Newsletter-Anmeldung über den Footer." },
+  });
+  return { ok: true };
+}
+
 // ---------- Buchung eines Termins ----------
 const bookingSchema = z.object({
   sessionId: z.string().min(1),
