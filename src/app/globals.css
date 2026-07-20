@@ -67,14 +67,10 @@ body {
 
 h1, h2, h3, h4 {
   font-family: var(--font-head), var(--font-sans), sans-serif;
-  /* Bowlby One SC gibt es nur in 400 — kein Faux-Bold erzwingen (sonst zu dick) */
-  font-weight: 400;
+  font-weight: 800; /* Outfit Bold, gemischte Schreibung wie im Original */
   line-height: 1.2;
+  letter-spacing: -0.01em;
   color: var(--foreground);
-}
-/* Kein synthetisches Fett fuer die Display-Schrift */
-h1, h2, h3, h4, .font-\[family-name\:var\(--font-heading\)\] {
-  font-synthesis-weight: none;
 }
 
 /* Fliesstext aus dem CMS (RichText/Blog) hübsch rendern */

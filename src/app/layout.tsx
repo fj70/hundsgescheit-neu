@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
-import { Outfit, Bowlby_One_SC, Fuzzy_Bubbles } from "next/font/google";
+import { Outfit, Fuzzy_Bubbles } from "next/font/google";
 import "./globals.css";
 import { getSettings } from "@/lib/settings";
 
-// Original-Schriften von hundsgescheit.de
-const body = Outfit({ variable: "--font-body", subsets: ["latin"], display: "swap" });
-const heading = Bowlby_One_SC({
+// Original-Schriften von hundsgescheit.de: Outfit für Text UND Überschriften (gemischte
+// Schreibung, bold), Fuzzy Bubbles als Handschrift-Akzent.
+const body = Outfit({
+  variable: "--font-body",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  display: "swap",
+});
+const heading = Outfit({
   variable: "--font-heading",
   subsets: ["latin"],
-  weight: "400",
+  weight: ["600", "700", "800"],
   display: "swap",
 });
 const hand = Fuzzy_Bubbles({
