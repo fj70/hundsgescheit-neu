@@ -63,7 +63,10 @@ export function Header({ nav, siteName }: { nav: NavItem[]; siteName: string }) 
           )}
         </nav>
 
-        <div className="hidden lg:block">
+        <div className="hidden items-center gap-4 lg:flex">
+          <Link href="/anmelden" className="text-sm font-medium text-muted hover:text-primary">
+            Login
+          </Link>
           <ButtonLink href="/kontakt" size="sm">
             Kontakt
           </ButtonLink>

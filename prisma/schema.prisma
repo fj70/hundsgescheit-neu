@@ -117,9 +117,14 @@ model Course {
   isActive        Boolean         @default(true)
   isBookable      Boolean         @default(true)
   order           Int             @default(0)
+  // Nur im Stammkunden-Bereich buchbar (Zugangskontrolle)
+  membersOnly     Boolean         @default(false)
+  // Voraussetzung: dieser Kurs ist erst buchbar, wenn requiresCourseId absolviert ist
+  requiresCourseId String?
   metaTitle       String?
   metaDescription String?
   sessions        CourseSession[]
+  courseAccess    CustomerCourseAccess[]
   createdAt       DateTime        @default(now())
   updatedAt       DateTime        @updatedAt
 }
@@ -153,11 +158,59 @@ model Booking {
   people        Int           @default(1)
   notes         String        @default("")
   status        String        @default("PENDING") // PENDING | CONFIRMED | CANCELLED
+  customer      Customer?     @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  customerId    String?
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
 
   @@index([sessionId])
   @@index([status])
+}
+
+// ---------- Stammkunden (geschlossener Buchungsbereich) ----------
+// Zugang nur nach Einladung durch Chiara. Erstkontakt laeuft ueber das Kontaktformular.
+model Customer {
+  id                   String   @id @default(cuid())
+  email                String   @unique
+  passwordHash         String? // null bis der Kunde ueber den Einladungs-Link sein Passwort setzt
+  status               String   @default("INVITED") // INVITED | ACTIVE | BLOCKED
+  inviteToken          String?  @unique
+  // Person
+  firstName            String   @default("")
+  lastName             String   @default("")
+  street               String   @default("")
+  zip                  String   @default("")
+  city                 String   @default("")
+  phone                String   @default("")
+  // Hund
+  dogName              String   @default("")
+  dogBreed             String   @default("")
+  dogAge               String   @default("")
+  dogProblems          String   @default("")
+  // Impfstatus
+  vaccinationImagePath String?
+  vaccinationApproved  Boolean  @default(false)
+  // interne Notiz Chiara
+  notes                String   @default("")
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  bookings     Booking[]
+  courseAccess CustomerCourseAccess[]
+}
+
+// Freigabe/Fortschritt je Kunde+Kurs (steuert Sichtbarkeit; Dummy 2 erst nach Dummy 1)
+model CustomerCourseAccess {
+  id         String   @id @default(cuid())
+  customer   Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  customerId String
+  course     Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  courseId   String
+  status     String   @default("UNLOCKED") // LOCKED | UNLOCKED | COMPLETED
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([customerId, courseId])
 }
 
 // ---------- Kontaktanfragen ----------

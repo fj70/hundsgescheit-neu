@@ -7,6 +7,7 @@ export const metadata = { title: "Verwaltung", robots: { index: false } };
 const NAV = [
   { href: "/admin", label: "Übersicht", exact: true },
   { href: "/admin/termine", label: "Termine & Buchungen" },
+  { href: "/admin/kunden", label: "Stammkunden" },
   { href: "/admin/kurse", label: "Kurse" },
   { href: "/admin/seiten", label: "Seiten" },
   { href: "/admin/blog", label: "Blog" },

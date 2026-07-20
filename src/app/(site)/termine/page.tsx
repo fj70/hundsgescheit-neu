@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { db } from "@/lib/db";
 import { formatDateTime, formatTime } from "@/lib/utils";
-import { BookingForm, type SessionOption } from "@/components/booking/BookingForm";
 
 export const metadata: Metadata = {
   title: "Termine & Buchung",
@@ -26,11 +25,6 @@ export default async function TerminePage() {
     return { ...s, free: Math.max(0, s.capacity - booked) };
   });
 
-  const options: SessionOption[] = withFree.map((s) => ({
-    id: s.id,
-    label: `${s.course.title} – ${formatDateTime(s.startsAt)}`,
-    free: s.free,
-  }));
 
   return (
     <>
@@ -83,14 +77,17 @@ export default async function TerminePage() {
 
           <div className="lg:sticky lg:top-24 lg:self-start">
             <div className="rounded-[20px] border bg-soft p-6 sm:p-8">
-              <h2 className="font-[family-name:var(--font-heading)] text-xl text-primary">Termin buchen</h2>
-              {options.length > 0 ? (
-                <div className="mt-5">
-                  <BookingForm sessions={options} />
-                </div>
-              ) : (
-                <p className="mt-4 text-sm text-muted">Zurzeit keine buchbaren Termine.</p>
-              )}
+              <h2 className="font-[family-name:var(--font-heading)] text-xl text-primary">Buchen im Stammkunden-Bereich</h2>
+              <p className="mt-3 text-sm text-muted">
+                Kurse buchst du bequem in deinem persönlichen Bereich. Den Zugang bekommst du von
+                Chiara nach dem ersten Training.
+              </p>
+              <a href="/anmelden" className="mt-5 block rounded-full bg-primary px-5 py-3 text-center text-sm font-semibold text-white hover:bg-primary-dark">
+                Zum Stammkunden-Login
+              </a>
+              <a href="/kontakt" className="mt-3 block rounded-full border-2 border-primary px-5 py-3 text-center text-sm font-semibold text-primary hover:bg-primary hover:text-white">
+                Neu hier? Kontakt aufnehmen
+              </a>
             </div>
           </div>
         </Container>

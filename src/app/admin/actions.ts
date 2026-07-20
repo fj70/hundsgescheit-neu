@@ -1,5 +1,6 @@
 "use server";
 
+import { randomBytes } from "node:crypto";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { requireUser } from "@/lib/auth";
@@ -257,6 +258,73 @@ export async function deleteEnquiry(formData: FormData) {
   await guard();
   await db.enquiry.delete({ where: { id: String(formData.get("id")) } });
   revalidatePath("/admin/anfragen");
+}
+
+// ---------- Stammkunden verwalten ----------
+export async function inviteCustomer(formData: FormData) {
+  await guard();
+  const email = String(formData.get("email") || "").toLowerCase().trim();
+  if (!email) return;
+  const token = randomBytes(24).toString("base64url");
+  await db.customer.upsert({
+    where: { email },
+    update: { inviteToken: token, status: "INVITED" },
+    create: {
+      email,
+      inviteToken: token,
+      status: "INVITED",
+      firstName: String(formData.get("firstName") || ""),
+      lastName: String(formData.get("lastName") || ""),
+      notes: String(formData.get("notes") || ""),
+    },
+  });
+  revalidatePath("/admin/kunden");
+}
+
+export async function setCustomerStatus(formData: FormData) {
+  await guard();
+  await db.customer.update({
+    where: { id: String(formData.get("id")) },
+    data: { status: String(formData.get("status")) },
+  });
+  revalidatePath("/admin/kunden");
+}
+
+export async function approveVaccination(formData: FormData) {
+  await guard();
+  await db.customer.update({
+    where: { id: String(formData.get("id")) },
+    data: { vaccinationApproved: formData.get("approved") === "1" },
+  });
+  revalidatePath(`/admin/kunden/${String(formData.get("id"))}`);
+}
+
+export async function saveCustomerNotes(formData: FormData) {
+  await guard();
+  const id = String(formData.get("id"));
+  await db.customer.update({ where: { id }, data: { notes: String(formData.get("notes") || "") } });
+  revalidatePath(`/admin/kunden/${id}`);
+}
+
+export async function regenerateInvite(formData: FormData) {
+  await guard();
+  const id = String(formData.get("id"));
+  await db.customer.update({ where: { id }, data: { inviteToken: randomBytes(24).toString("base64url"), status: "INVITED" } });
+  revalidatePath(`/admin/kunden/${id}`);
+}
+
+// Kurs-Freigabe/Fortschritt je Kunde (LOCKED | UNLOCKED | COMPLETED)
+export async function setCourseAccess(formData: FormData) {
+  await guard();
+  const customerId = String(formData.get("customerId"));
+  const courseId = String(formData.get("courseId"));
+  const status = String(formData.get("status"));
+  await db.customerCourseAccess.upsert({
+    where: { customerId_courseId: { customerId, courseId } },
+    update: { status },
+    create: { customerId, courseId, status },
+  });
+  revalidatePath(`/admin/kunden/${customerId}`);
 }
 
 // ---------- Einstellungen ----------

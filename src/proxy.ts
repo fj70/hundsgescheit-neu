@@ -7,26 +7,38 @@ const secret = new TextEncoder().encode(
   process.env.AUTH_SECRET || "dev-insecure-secret-change-me-please-32chars",
 );
 
+async function hasValid(request: NextRequest, cookieName: string): Promise<boolean> {
+  const token = request.cookies.get(cookieName)?.value;
+  if (!token) return false;
+  try {
+    await jwtVerify(token, secret);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  if (pathname === "/admin/login") return NextResponse.next();
 
-  const token = request.cookies.get("hg_session")?.value;
-  let valid = false;
-  if (token) {
-    try {
-      await jwtVerify(token, secret);
-      valid = true;
-    } catch {
-      valid = false;
+  // Stammkunden-Bereich: eigene Session
+  if (pathname.startsWith("/mein-bereich")) {
+    if (!(await hasValid(request, "hg_customer"))) {
+      return NextResponse.redirect(new URL("/anmelden", request.url));
     }
+    return NextResponse.next();
   }
-  if (!valid) {
-    return NextResponse.redirect(new URL("/admin/login", request.url));
+
+  // Admin
+  if (pathname.startsWith("/admin")) {
+    if (pathname === "/admin/login") return NextResponse.next();
+    if (!(await hasValid(request, "hg_session"))) {
+      return NextResponse.redirect(new URL("/admin/login", request.url));
+    }
   }
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: "/admin/:path*",
+  matcher: ["/admin/:path*", "/mein-bereich/:path*"],
 };

@@ -74,6 +74,26 @@ async function main() {
     },
   });
 
+  // ---------- Demo-Stammkunde (zum Testen des Login-Bereichs) ----------
+  await db.customer.create({
+    data: {
+      email: "kunde@example.com",
+      passwordHash: await bcrypt.hash("kunde2026", 10),
+      status: "ACTIVE",
+      firstName: "Testkunde",
+      lastName: "Muster",
+      street: "Musterweg 1",
+      zip: "45127",
+      city: "Essen",
+      phone: "0201 000000",
+      dogName: "Balu",
+      dogBreed: "Labrador",
+      dogAge: "3 Jahre",
+      dogProblems: "Leinenpöbeln, Rückruf",
+      vaccinationApproved: true,
+    },
+  });
+
   // ---------- Einstellungen ----------
   console.log("→ Einstellungen …");
   const settings: Record<string, string> = {
