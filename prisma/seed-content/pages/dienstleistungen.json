@@ -15,22 +15,30 @@
         {
           "title": "Einzelcoaching",
           "text": "Beim Einzelcoaching betreue ich dich individuell und wir arbeiten intensiv an euren Themen. Der perfekte Weg, wenn du nachhaltig Erfolge erzielen möchtest. Ort und Zeit passe ich an deine Wünsche an.",
-          "href": "/einzelcoaching"
+          "href": "/einzelcoaching",
+          "color": "einzel",
+          "image": ""
         },
         {
           "title": "Onlinecoaching",
           "text": "Egal ob beim Aufbau eines neuen Tricks oder beim Üben des Alleine bleiben: Das Onlinecoaching bietet erfolgsversprechende Trainingsmöglichkeiten, wo das Präsenztraining an seine Grenzen kommt.",
-          "href": "/onlinecoaching"
+          "href": "/onlinecoaching",
+          "color": "online",
+          "image": ""
         },
         {
           "title": "Gruppencoaching",
           "text": "Egal ob  Alltagstraining, Grunderziehung, Vorbereitung auf die Begleithundeprüfung oder Beschäftigung und Auslastung mit deinem Hund: Beim Gruppencoaching ist für jedes Mensch-Hund-Team das passende Angebot dabei.",
-          "href": "/gruppencoaching"
+          "href": "/gruppencoaching",
+          "color": "gruppe",
+          "image": ""
         },
         {
           "title": "Social Walk",
           "text": "Das angeleitete Spazieren gehen mit anderen Hunden schult die sozialen Kompetenzen deines Vierbeiners. Dein Hund lernt Frust auszuhalten, Impulse zu kontrollieren und in Gegenwart von anderen Hunden zu entspannen.",
-          "href": "/socialwalk"
+          "href": "/socialwalk",
+          "color": "social",
+          "image": ""
         }
       ]
     }

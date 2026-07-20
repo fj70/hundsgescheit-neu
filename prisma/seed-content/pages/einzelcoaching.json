@@ -6,37 +6,52 @@
       "subline": "",
       "image": "",
       "primary": [
-        { "label": "Jetzt Kontakt aufnehmen", "href": "/kontakt" }
+        {
+          "label": "Jetzt Kontakt aufnehmen",
+          "href": "/kontakt"
+        }
       ],
       "secondary": []
     }
   },
   {
-    "type": "RICHTEXT",
+    "type": "IMAGE_TEXT",
     "data": {
       "heading": "Erstgespräch",
-      "html": "<p class=\"eyebrow\">Erstmal beschnuppern</p><p>Das Erstgespräch ist ein erstes Kennenlernen bei dir zu Hause. Hier hast die Möglichkeit, eure Geschichte ganz in Ruhe zu erzählen. Während des Gespräches gehen wir auf alle möglichen Aspekte ein, die einen Einfluss auf das Verhalten deines Hundes haben könnten. Das ist besonders wichtig, da ich nicht Symptome bekämpfe, sondern im Rahmen eines ganzheitlichen Trainingsansatzes herausfiltern möchte, was die Ursache für das Verhalten deines Hundes ist.</p><p>Aber natürlich reden wir nicht nur. Erste Trainingsschritte werden direkt beim ersten Termin festgelegt und die ersten praktischen Übungen durchgeführt.</p><ul><li>Wann? individuell nach telefonischer Absprache</li><li>Wo? bei dir zu Hause</li><li>Wie lange? 1 Std. 15 Min.</li><li>Wie teuer? 95 € zzgl. Anfahrtskosten (jede weitere angebrochene 15 Min. 20 €)</li><li>Bezahlung: Bar, Kartenzahlung oder PayPal</li><li>Stornierungsfrist ohne Gebühren: 48 Stunden vor dem Termin</li></ul><p><a href=\"/kontakt\">Jetzt Kontakt aufnehmen</a></p>"
+      "html": "<p class=\"eyebrow\">Erstmal beschnuppern</p><p>Das Erstgespräch ist ein erstes Kennenlernen bei dir zu Hause. Hier hast die Möglichkeit, eure Geschichte ganz in Ruhe zu erzählen. Während des Gespräches gehen wir auf alle möglichen Aspekte ein, die einen Einfluss auf das Verhalten deines Hundes haben könnten. Das ist besonders wichtig, da ich nicht Symptome bekämpfe, sondern im Rahmen eines ganzheitlichen Trainingsansatzes herausfiltern möchte, was die Ursache für das Verhalten deines Hundes ist.</p><p>Aber natürlich reden wir nicht nur. Erste Trainingsschritte werden direkt beim ersten Termin festgelegt und die ersten praktischen Übungen durchgeführt.</p><ul><li>Wann? individuell nach telefonischer Absprache</li><li>Wo? bei dir zu Hause</li><li>Wie lange? 1 Std. 15 Min.</li><li>Wie teuer? 95 € zzgl. Anfahrtskosten (jede weitere angebrochene 15 Min. 20 €)</li><li>Bezahlung: Bar, Kartenzahlung oder PayPal</li><li>Stornierungsfrist ohne Gebühren: 48 Stunden vor dem Termin</li></ul><p><a href=\"/kontakt\">Jetzt Kontakt aufnehmen</a></p>",
+      "image": "/uploads/2026/06/verbundenheit-olaf-1024x683.jpg",
+      "imageSide": "right",
+      "imageAlt": "Hundetraining"
     }
   },
   {
-    "type": "RICHTEXT",
+    "type": "IMAGE_TEXT",
     "data": {
       "heading": "Einzelstunde",
-      "html": "<p class=\"eyebrow\">Und weiter geht`s.</p><p>Nachdem wir uns während des Erstgesprächs erstmal ein wenig beschnuppert haben, geht es jetzt so richtig los. Einzelstunden bieten euch als Team die Möglichkeit, intensiv an euren Themen zu arbeiten. Individuell ist hier das Stichwort. Schema F war gestern. Ich unterstützte euch dabei, genau den Trainingsansatz zu finden und umzusetzen, der zu euch als Team passt. Auf der Grundlage eines individuellen Trainingsplans gehen wir systematisch vor, um nachhaltig Erfolge zu erzielen.</p><ul><li>Wann? individuell nach telefonischer Absprache</li><li>Wo? an einem Ort deiner Wahl</li><li>Wie lange? 1 Std.</li><li>Wie teuer? 80 € zzgl. Anfahrtskosten (jede weitere angebrochene 15 Min. 20 €)</li><li>Bezahlung: Bar, Kartenzahlung oder PayPal</li><li>Stornierungsfrist ohne Gebühren: 48 Stunden vor dem Termin</li></ul><p><a href=\"/kontakt\">Jetzt Kontakt aufnehmen</a></p>"
+      "html": "<p class=\"eyebrow\">Und weiter geht`s.</p><p>Nachdem wir uns während des Erstgesprächs erstmal ein wenig beschnuppert haben, geht es jetzt so richtig los. Einzelstunden bieten euch als Team die Möglichkeit, intensiv an euren Themen zu arbeiten. Individuell ist hier das Stichwort. Schema F war gestern. Ich unterstützte euch dabei, genau den Trainingsansatz zu finden und umzusetzen, der zu euch als Team passt. Auf der Grundlage eines individuellen Trainingsplans gehen wir systematisch vor, um nachhaltig Erfolge zu erzielen.</p><ul><li>Wann? individuell nach telefonischer Absprache</li><li>Wo? an einem Ort deiner Wahl</li><li>Wie lange? 1 Std.</li><li>Wie teuer? 80 € zzgl. Anfahrtskosten (jede weitere angebrochene 15 Min. 20 €)</li><li>Bezahlung: Bar, Kartenzahlung oder PayPal</li><li>Stornierungsfrist ohne Gebühren: 48 Stunden vor dem Termin</li></ul><p><a href=\"/kontakt\">Jetzt Kontakt aufnehmen</a></p>",
+      "image": "/uploads/2026/06/trainer-emil-olaf-1024x683.jpg",
+      "imageSide": "left",
+      "imageAlt": "Hundetraining"
     }
   },
   {
-    "type": "RICHTEXT",
+    "type": "IMAGE_TEXT",
     "data": {
       "heading": "Einzelstunde ohne Halter*in",
-      "html": "<p class=\"eyebrow\">Ein professioneller Blick von Außen.</p><p>Du kommst mit deinem Hund einfach nicht weiter? Du brauchst einfach mal eine Pause von deinem Hund? Ich hole deinen Hund bei dir zu Hause ab und trainiere an einem geeigneten Ort an individuellen Themen wie bspw. Hundebegegnungen, Rückruf und Leinenführigkeit. Anschließend bringe ich den Hund wieder zu dir zurück und gebe dir eine Einschätzung sowie Empfehlungen für die nächsten Trainingsschritte.</p><ul><li>Wann? nach individueller Absprache</li><li>Wie lange? 1 Std. individuelles Training</li><li>Wie teuer? 50 € zzgl. doppelter Fahrtkosten inkl. Nachbesprechung mit Halter*in, 10€ Wochenendzuschlag (jede weitere angebrochene 30 Min. +25€)</li><li>Wo? Abholung des Hundes bei dir zu Hause</li><li>Bezahlung: Bar, Kartenzahlung oder PayPal</li><li>Stornierungsfrist ohne Gebühren: 48 Stunden vor dem Termin</li></ul><p><a href=\"/kontakt\">Jetzt Kontakt aufnehmen</a></p>"
+      "html": "<p class=\"eyebrow\">Ein professioneller Blick von Außen.</p><p>Du kommst mit deinem Hund einfach nicht weiter? Du brauchst einfach mal eine Pause von deinem Hund? Ich hole deinen Hund bei dir zu Hause ab und trainiere an einem geeigneten Ort an individuellen Themen wie bspw. Hundebegegnungen, Rückruf und Leinenführigkeit. Anschließend bringe ich den Hund wieder zu dir zurück und gebe dir eine Einschätzung sowie Empfehlungen für die nächsten Trainingsschritte.</p><ul><li>Wann? nach individueller Absprache</li><li>Wie lange? 1 Std. individuelles Training</li><li>Wie teuer? 50 € zzgl. doppelter Fahrtkosten inkl. Nachbesprechung mit Halter*in, 10€ Wochenendzuschlag (jede weitere angebrochene 30 Min. +25€)</li><li>Wo? Abholung des Hundes bei dir zu Hause</li><li>Bezahlung: Bar, Kartenzahlung oder PayPal</li><li>Stornierungsfrist ohne Gebühren: 48 Stunden vor dem Termin</li></ul><p><a href=\"/kontakt\">Jetzt Kontakt aufnehmen</a></p>",
+      "image": "/uploads/2026/06/IMG_2319-768x1024.jpeg",
+      "imageSide": "right",
+      "imageAlt": "Hundetraining"
     }
   },
   {
-    "type": "RICHTEXT",
+    "type": "IMAGE_TEXT",
     "data": {
       "heading": "Begleithundeprüfung",
-      "html": "<p class=\"eyebrow\">Vorbereitung auf die</p><p>Ich begleite dich und deinen Hund auf dem Weg zur erfolgreichen Begleithundeprüfung. Ich zeige dir, wie du von Anfang an alle Kommandos und Übungen der Unterordnung mit deinem Hund sauber auftrainierst. Dazu zählt das hundesportliche Fußlaufen in normalem, schnellen und langsamen Tempo, das schnelle und gerade hinsetzen und ablegen sowie das zügige und gerade Herankommen des Hundes. Auch die saubere und fokussierte Ablage trainieren wir gemeinsam, sodass dein Hund zuverlässig liegen bleibt trotz hoher Reizlage und langer Zeitdauer.</p><p>Wichtig: Ich bereite euch lediglich auf die Prüfung vor. Wenn du dich prüfungsbereit fühlst, kannst du in einem Hundesportverein deiner Wahl die Begleithundeprüfung ablegen.</p><ul><li>Wann? individuell nach Absprache</li><li>Wo? an einem Ort deiner Wahl</li><li>Wie lange? 30 Min.</li><li>Wie teuer? 40 € (jede weitere angebrochene 15 Min. 20 €), zzgl. Anfahrtskosten</li><li>Bezahlung: Bar, Kartenzahlung oder PayPal</li><li>Stornierungsfrist ohne Gebühren: 48 Stunden vor dem Termin</li></ul><p><a href=\"/kontakt\">Jetzt Kontakt aufnehmen</a></p><p><a href=\"https://youtu.be/RoB_FrdYqnQ?si=_k17q2-ll6gnEKNN\">Video ansehen</a></p>"
+      "html": "<p class=\"eyebrow\">Vorbereitung auf die</p><p>Ich begleite dich und deinen Hund auf dem Weg zur erfolgreichen Begleithundeprüfung. Ich zeige dir, wie du von Anfang an alle Kommandos und Übungen der Unterordnung mit deinem Hund sauber auftrainierst. Dazu zählt das hundesportliche Fußlaufen in normalem, schnellen und langsamen Tempo, das schnelle und gerade hinsetzen und ablegen sowie das zügige und gerade Herankommen des Hundes. Auch die saubere und fokussierte Ablage trainieren wir gemeinsam, sodass dein Hund zuverlässig liegen bleibt trotz hoher Reizlage und langer Zeitdauer.</p><p>Wichtig: Ich bereite euch lediglich auf die Prüfung vor. Wenn du dich prüfungsbereit fühlst, kannst du in einem Hundesportverein deiner Wahl die Begleithundeprüfung ablegen.</p><ul><li>Wann? individuell nach Absprache</li><li>Wo? an einem Ort deiner Wahl</li><li>Wie lange? 30 Min.</li><li>Wie teuer? 40 € (jede weitere angebrochene 15 Min. 20 €), zzgl. Anfahrtskosten</li><li>Bezahlung: Bar, Kartenzahlung oder PayPal</li><li>Stornierungsfrist ohne Gebühren: 48 Stunden vor dem Termin</li></ul><p><a href=\"/kontakt\">Jetzt Kontakt aufnehmen</a></p><p><a href=\"https://youtu.be/RoB_FrdYqnQ?si=_k17q2-ll6gnEKNN\">Video ansehen</a></p>",
+      "image": "/uploads/2026/06/bhp-bestanden-768x1024.jpg",
+      "imageSide": "left",
+      "imageAlt": "Hundetraining"
     }
   }
 ]
