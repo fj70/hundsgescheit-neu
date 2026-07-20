@@ -25,24 +25,33 @@
     }
   },
   {
-    "type": "RICHTEXT",
+    "type": "IMAGE_TEXT",
     "data": {
       "heading": "",
-      "html": "<h5>1. Schwerpunkt</h5><h2>Reaktive Hunde</h2><p>Durch das Training und das Zusammenleben mit meinem eigenen impulsiven und reaktiven Hund verstehe ich, wie du dich fühlst. Jedes Mal, wenn dein Hund in die Leine springt, bellt oder vielleicht sogar zubeißen will, möchtest du im Erdboden versinken. Dich überkommt eine Flut aus unangenehmen Gefühlen: Scham, Hilflosigkeit, Wut, Verzweiflung. Ich kenne das. Ich habe es selbst durchlebt. Und aus heutiger Perspektive möchte ich dir eins sagen: Dieser eine Hund wird dein Leben komplett auf denKopf stellen. Er wird dich von Grund auf verändern. Denn Hunde wie deiner bewirken etwas bei ihrem Menschen: Sie zwingen uns in die Entwicklung, in die Selbstreflexion. Bist du bereit für wirkliche Veränderung? Ich arbeite ganzheitlich an der Beziehung zwischen dir und deinem Hund. Mein Wunsch ist jedem Hund zu Ausgeglichenheit und Entspannung zu verhelfen. Die Bedürfnisse des Hundes zu kennen und zu erfüllen bedeutet Verantwortung zu übernehmen und dem Hund Orientierung zu geben.</p><p><a href=\"/kontakt\">Jetzt Kontakt aufnehmen</a></p>"
+      "html": "<h5>1. Schwerpunkt</h5><h2>Reaktive Hunde</h2><p>Durch das Training und das Zusammenleben mit meinem eigenen impulsiven und reaktiven Hund verstehe ich, wie du dich fühlst. Jedes Mal, wenn dein Hund in die Leine springt, bellt oder vielleicht sogar zubeißen will, möchtest du im Erdboden versinken. Dich überkommt eine Flut aus unangenehmen Gefühlen: Scham, Hilflosigkeit, Wut, Verzweiflung. Ich kenne das. Ich habe es selbst durchlebt. Und aus heutiger Perspektive möchte ich dir eins sagen: Dieser eine Hund wird dein Leben komplett auf denKopf stellen. Er wird dich von Grund auf verändern. Denn Hunde wie deiner bewirken etwas bei ihrem Menschen: Sie zwingen uns in die Entwicklung, in die Selbstreflexion. Bist du bereit für wirkliche Veränderung? Ich arbeite ganzheitlich an der Beziehung zwischen dir und deinem Hund. Mein Wunsch ist jedem Hund zu Ausgeglichenheit und Entspannung zu verhelfen. Die Bedürfnisse des Hundes zu kennen und zu erfüllen bedeutet Verantwortung zu übernehmen und dem Hund Orientierung zu geben.</p><p><a href=\"/kontakt\">Jetzt Kontakt aufnehmen</a></p>",
+      "image": "/uploads/2026/06/IMG_2319-768x1024.jpeg",
+      "imageAlt": "Reaktive Hunde – Training",
+      "imageSide": "left"
     }
   },
   {
-    "type": "RICHTEXT",
+    "type": "IMAGE_TEXT",
     "data": {
       "heading": "",
-      "html": "<h5>2. Schwerpunkt</h5><h2>Auslastung &amp; Hundesport</h2><p>JEDER Hund hat das Recht artgerecht ausgelastet und gefördert zu werden. Früher hatten Hunde eine Aufgabe: Sie wurden u.a. bei der Jagd eingesetzt oder haben dem Schäfer bei dem Hüten der Schafherde unterstützt. Heutzutage werden Hunde meiner Ansicht nach viel zu selten geistig und körperlich gefördert. Dummyarbeit als Ersatz für den jagdlichen Einsatz nach dem Schuss oder hundesportliche Unterordnung für arbeitswillige Rassen. Es gibt viele Möglichkeiten dem Hund eine Aufgabe zu geben und zu fördern. Und genau diese gemeinsame Zeit zwischen Mensch und Hund wirkt wie Klebstoff für die Bindung. Im Bereich Gruppencoachings findest du alle Informationen zu aktuell laufenden Kursen aus den Bereichen Grunderziehung und Auslastung.</p><p><a href=\"/kontakt\">Jetzt Kontakt aufnehmen</a></p>"
+      "html": "<h5>2. Schwerpunkt</h5><h2>Auslastung &amp; Hundesport</h2><p>JEDER Hund hat das Recht artgerecht ausgelastet und gefördert zu werden. Früher hatten Hunde eine Aufgabe: Sie wurden u.a. bei der Jagd eingesetzt oder haben dem Schäfer bei dem Hüten der Schafherde unterstützt. Heutzutage werden Hunde meiner Ansicht nach viel zu selten geistig und körperlich gefördert. Dummyarbeit als Ersatz für den jagdlichen Einsatz nach dem Schuss oder hundesportliche Unterordnung für arbeitswillige Rassen. Es gibt viele Möglichkeiten dem Hund eine Aufgabe zu geben und zu fördern. Und genau diese gemeinsame Zeit zwischen Mensch und Hund wirkt wie Klebstoff für die Bindung. Im Bereich Gruppencoachings findest du alle Informationen zu aktuell laufenden Kursen aus den Bereichen Grunderziehung und Auslastung.</p><p><a href=\"/kontakt\">Jetzt Kontakt aufnehmen</a></p>",
+      "image": "/uploads/2026/06/verbundenheit-olaf-1024x683.jpg",
+      "imageAlt": "Auslastung & Hundesport",
+      "imageSide": "right"
     }
   },
   {
-    "type": "RICHTEXT",
+    "type": "IMAGE_TEXT",
     "data": {
       "heading": "Über uns",
-      "html": "<h2>Das dynamische Trio</h2><p>Warum bin ich Hundetrainerin geworden? Die Antwort ist ganz einfach: weil ich es liebe. ich wollte schon immer einen Beruf ausüben, der mich begeistert und fasziniert. Und genau diesen Beruf habe ich mit dem Hundetraining gefunden. Aber was wäre ich ohne meine Hunde? Meine Hunde sind der Grund, warum ich überhaupt mit dem Hundetraining begonnen habe. Meine Hunde sind der Grund, warum ich meine Trainingsphilosophie und -methoden jeden Tag überdenke, reflektiere, umsetze und weiter ausbaue. Wenn man eigene Hunde hat, hört das Training nie auf. Und genau das lebe ich jeden Tag.</p><ul><li>Chiara: Hundetrainerin und Lehrerin</li><li>Emil: Troublemaker und Dampfwalze</li><li>Olaf: professioneller Lebensmittelverwerter</li></ul>"
+      "html": "<h2>Das dynamische Trio</h2><p>Warum bin ich Hundetrainerin geworden? Die Antwort ist ganz einfach: weil ich es liebe. ich wollte schon immer einen Beruf ausüben, der mich begeistert und fasziniert. Und genau diesen Beruf habe ich mit dem Hundetraining gefunden. Aber was wäre ich ohne meine Hunde? Meine Hunde sind der Grund, warum ich überhaupt mit dem Hundetraining begonnen habe. Meine Hunde sind der Grund, warum ich meine Trainingsphilosophie und -methoden jeden Tag überdenke, reflektiere, umsetze und weiter ausbaue. Wenn man eigene Hunde hat, hört das Training nie auf. Und genau das lebe ich jeden Tag.</p><ul><li>Chiara: Hundetrainerin und Lehrerin</li><li>Emil: Troublemaker und Dampfwalze</li><li>Olaf: professioneller Lebensmittelverwerter</li></ul>",
+      "image": "/uploads/2026/06/trainer-emil-olaf-1024x683.jpg",
+      "imageAlt": "Emil und Olaf – das dynamische Trio",
+      "imageSide": "left"
     }
   },
   {
