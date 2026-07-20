@@ -2,18 +2,19 @@
   {
     "type": "HERO",
     "data": {
-      "headline": "Herzlich Willkommen in der Hundeschule Hundsgescheit",
-      "subline": "Hundetraining mit Herz & Verstand",
+      "eyebrow": "Herzlich Willkommen in der",
+      "headline": "Hundeschule Hundsgescheit",
+      "headlineAccent": "Hundetraining mit Herz & Verstand",
+      "intro": "Vom reaktiven verhaltensauffälligem Hund zum Musterschüler.",
+      "bullets": [
+        "Dein Hund explodiert in jeder Hundebegegnung?",
+        "Spaziergänge werden zum Spießrutenlauf?",
+        "Dein Hund ist draußen wie weggebeamt und nimmt dich überhaupt nicht wahr?",
+        "Dein Hund kommt einfach nicht zur Ruhe?"
+      ],
       "image": "/uploads/2026/06/339a0049-2495-404d-9db7-c630ed9d3bed-768x1024.jpeg",
       "primary": [],
       "secondary": []
-    }
-  },
-  {
-    "type": "RICHTEXT",
-    "data": {
-      "heading": "",
-      "html": "<h5>Vom <strong>reaktiven</strong> <strong>verhaltensauffälligem</strong> Hund zum Musterschüler.</h5><ul><li>Dein Hund explodiert in jeder Hundebegegnung?</li><li>Spaziergänge werden zum Spießrutenlauf?</li><li>Dein Hund ist draußen wie weggebeamt und nimmt dich überhaupt nicht wahr?</li><li>Dein Hund kommt einfach nicht zur Ruhe?</li></ul>"
     }
   },
   {

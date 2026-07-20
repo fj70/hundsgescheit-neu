@@ -75,26 +75,47 @@ function SingleSection({ section, altBg }: { section: SectionRow; altBg: boolean
       const primary = firstLink(d, "primary");
       const secondary = firstLink(d, "secondary");
       const image = s(d, "image");
+      const eyebrow = s(d, "eyebrow");
+      const headlineAccent = s(d, "headlineAccent");
+      const intro = s(d, "intro");
+      const bullets = arr(d, "bullets");
       return (
         <section className="relative overflow-hidden">
           <div className="absolute inset-0 -z-10 bg-gradient-to-br from-soft via-background to-soft-2" />
-          <Container className="grid items-center gap-10 py-16 sm:py-24 lg:grid-cols-2">
+          <Container className="grid items-center gap-10 py-16 sm:py-20 lg:grid-cols-2">
             <div className="hg-reveal">
-              <p className="font-[family-name:var(--font-hand)] text-xl text-secondary">
-                Hundeschule in Essen &amp; Umgebung
-              </p>
-              <h1 className="mt-2 font-[family-name:var(--font-heading)] text-4xl leading-tight text-primary sm:text-5xl lg:text-[3.5rem]">
+              {eyebrow && (
+                <p className="font-[family-name:var(--font-hand)] text-xl text-secondary">{eyebrow}</p>
+              )}
+              <h1 className="mt-1 font-[family-name:var(--font-heading)] text-4xl font-extrabold leading-tight text-navy sm:text-5xl">
                 {s(d, "headline", "Herzlich willkommen")}
+                {headlineAccent && <span className="mt-1 block text-primary">{headlineAccent}</span>}
               </h1>
-              {s(d, "subline") && (
+              {intro && <p className="mt-5 max-w-xl text-lg font-semibold text-foreground">{intro}</p>}
+              {!intro && s(d, "subline") && (
                 <p className="mt-5 max-w-xl text-lg text-muted">{s(d, "subline")}</p>
               )}
-              <div className="mt-8 flex flex-wrap gap-3">
-                {primary && <ButtonLink href={primary.href} size="lg">{primary.label}</ButtonLink>}
-                {secondary && (
-                  <ButtonLink href={secondary.href} size="lg" variant="outline">{secondary.label}</ButtonLink>
-                )}
-              </div>
+              {bullets.length > 0 && (
+                <ul className="mt-5 space-y-2.5">
+                  {bullets.map((b, i) => {
+                    const text = typeof b === "string" ? b : String((b as Record<string, unknown>).text ?? "");
+                    return (
+                      <li key={i} className="flex items-start gap-3 text-foreground/90">
+                        <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent text-xs text-white" aria-hidden>✓</span>
+                        <span>{text}</span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+              {(primary || secondary) && (
+                <div className="mt-8 flex flex-wrap gap-3">
+                  {primary && <ButtonLink href={primary.href} size="lg">{primary.label}</ButtonLink>}
+                  {secondary && (
+                    <ButtonLink href={secondary.href} size="lg" variant="outline">{secondary.label}</ButtonLink>
+                  )}
+                </div>
+              )}
             </div>
             {image && (
               <div className="hg-reveal relative mx-auto w-full max-w-md">

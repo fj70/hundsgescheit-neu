@@ -17,12 +17,12 @@ export function Header({ nav, siteName }: { nav: NavItem[]; siteName: string }) 
       <Container className="flex items-center justify-between gap-4 py-3">
         <Link href="/" className="flex items-center shrink-0" aria-label={siteName}>
           <Image
-            src="/uploads/2025/01/logo-768x274.png"
+            src="/uploads/2025/01/logo-1024x365.png"
             alt={siteName}
-            width={190}
-            height={68}
+            width={1024}
+            height={365}
             priority
-            className="h-10 w-auto sm:h-12"
+            className="h-12 w-auto sm:h-14"
           />
         </Link>
 
