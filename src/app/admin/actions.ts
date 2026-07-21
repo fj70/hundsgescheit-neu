@@ -181,6 +181,8 @@ export async function saveCourse(formData: FormData) {
     imagePath: String(formData.get("imagePath") || "") || null,
     isActive: formData.get("isActive") === "on",
     isBookable: formData.get("isBookable") === "on",
+    membersOnly: formData.get("membersOnly") === "on",
+    requiresCourseId: String(formData.get("requiresCourseId") || "") || null,
   };
   if (id) {
     await db.course.update({ where: { id }, data });
@@ -325,6 +327,39 @@ export async function setCourseAccess(formData: FormData) {
     create: { customerId, courseId, status },
   });
   revalidatePath(`/admin/kunden/${customerId}`);
+}
+
+// ---------- Online-Kurse / Videothek ----------
+export async function saveVideoProduct(formData: FormData) {
+  await guard();
+  const id = String(formData.get("id") || "");
+  const title = String(formData.get("title") || "").trim();
+  if (!title) return;
+  const data = {
+    title,
+    description: String(formData.get("description") || ""),
+    priceCents: Math.round(Number(formData.get("priceEuro") || 0) * 100),
+    coverPath: String(formData.get("coverPath") || "") || null,
+    videoUrl: String(formData.get("videoUrl") || ""),
+    previewUrl: String(formData.get("previewUrl") || ""),
+    isPublished: formData.get("isPublished") === "on",
+  };
+  if (id) {
+    await db.videoProduct.update({ where: { id }, data });
+  } else {
+    let slug = slugify(title);
+    while (await db.videoProduct.findUnique({ where: { slug } })) slug = `${slug}-2`;
+    await db.videoProduct.create({ data: { ...data, slug, order: 99 } });
+  }
+  refreshPublic();
+  redirect("/admin/videos");
+}
+
+export async function deleteVideoProduct(formData: FormData) {
+  await guard();
+  await db.videoProduct.delete({ where: { id: String(formData.get("id")) } });
+  refreshPublic();
+  redirect("/admin/videos");
 }
 
 // ---------- Einstellungen ----------

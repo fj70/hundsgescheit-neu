@@ -11,6 +11,7 @@ const NAV = [
   { href: "/admin/kurse", label: "Kurse" },
   { href: "/admin/seiten", label: "Seiten" },
   { href: "/admin/blog", label: "Blog" },
+  { href: "/admin/videos", label: "Online-Kurse" },
   { href: "/admin/medien", label: "Medien" },
   { href: "/admin/anfragen", label: "Anfragen" },
   { href: "/admin/einstellungen", label: "Einstellungen" },

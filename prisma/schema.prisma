@@ -197,6 +197,7 @@ model Customer {
 
   bookings     Booking[]
   courseAccess CustomerCourseAccess[]
+  purchases    Purchase[]
 }
 
 // Freigabe/Fortschritt je Kunde+Kurs (steuert Sichtbarkeit; Dummy 2 erst nach Dummy 1)
@@ -223,6 +224,39 @@ model Enquiry {
   message   String
   isRead    Boolean  @default(false)
   createdAt DateTime @default(now())
+}
+
+// ---------- Online-Kurse / bezahlte Videos (Videothek) ----------
+model VideoProduct {
+  id           String     @id @default(cuid())
+  slug         String     @unique
+  title        String
+  description  String     @default("")
+  priceCents   Int        @default(0) // Einmalkauf-Preis
+  coverPath    String?
+  // Vollvideo (nur nach Kauf sichtbar) + kostenloser Teaser
+  videoUrl     String     @default("") // z.B. eingebetteter Player-Link (Vimeo/YouTube-unlisted)
+  previewUrl   String     @default("") // Teaser (öffentlich)
+  isPublished  Boolean    @default(false)
+  order        Int        @default(0)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  purchases    Purchase[]
+}
+
+model Purchase {
+  id              String       @id @default(cuid())
+  customer        Customer     @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  customerId      String
+  product         VideoProduct @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId       String
+  status          String       @default("PENDING") // PENDING | PAID | CANCELLED
+  stripeSessionId String?
+  amountCents     Int          @default(0)
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@unique([customerId, productId])
 }
 
 // ---------- Globale Einstellungen (Kontakt, Oeffnungszeiten, SEO, LocalBusiness) ----------

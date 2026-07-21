@@ -3,7 +3,7 @@ import { saveCourse, deleteCourse } from "@/app/admin/actions";
 
 const input = "w-full rounded-lg border bg-white px-3 py-2 text-sm";
 
-function CourseForm({ course }: { course?: any }) {
+function CourseForm({ course, allCourses }: { course?: any; allCourses: { id: string; title: string }[] }) {
   return (
     <form action={saveCourse} className="grid gap-3 sm:grid-cols-2">
       {course && <input type="hidden" name="id" value={course.id} />}
@@ -54,6 +54,16 @@ function CourseForm({ course }: { course?: any }) {
       </div>
       <label className="flex items-center gap-2 text-sm"><input type="checkbox" name="isActive" defaultChecked={course?.isActive ?? true} /> Aktiv</label>
       <label className="flex items-center gap-2 text-sm"><input type="checkbox" name="isBookable" defaultChecked={course?.isBookable ?? true} /> Online buchbar</label>
+      <label className="flex items-center gap-2 text-sm"><input type="checkbox" name="membersOnly" defaultChecked={course?.membersOnly ?? false} /> Nur für Stammkunden (Login nötig)</label>
+      <div>
+        <label className="mb-1 block text-xs text-muted">Voraussetzung (erst buchbar, wenn dieser Kurs absolviert)</label>
+        <select name="requiresCourseId" defaultValue={course?.requiresCourseId ?? ""} className={input}>
+          <option value="">— keine —</option>
+          {allCourses.filter((c) => c.id !== course?.id).map((c) => (
+            <option key={c.id} value={c.id}>{c.title}</option>
+          ))}
+        </select>
+      </div>
       <div className="sm:col-span-2">
         <button className="rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white">Speichern</button>
       </div>
@@ -76,14 +86,14 @@ export default async function AdminKurse() {
             <span><span className="mr-2 inline-block h-2.5 w-2.5 rounded-full" style={{ backgroundColor: c.color }} />{c.title}</span>
             <span className="text-xs text-muted">{c.isActive ? "aktiv" : "inaktiv"}</span>
           </summary>
-          <div className="mt-4"><CourseForm course={c} /></div>
+          <div className="mt-4"><CourseForm course={c} allCourses={courses} /></div>
           <form action={deleteCourse} className="mt-3 border-t pt-3"><input type="hidden" name="id" value={c.id} /><button className="text-xs text-red-600 hover:underline">Kurs löschen</button></form>
         </details>
       ))}
 
       <details className="rounded-[20px] border border-dashed bg-white p-5">
         <summary className="cursor-pointer font-[family-name:var(--font-heading)] text-primary">+ Neuen Kurs anlegen</summary>
-        <div className="mt-4"><CourseForm /></div>
+        <div className="mt-4"><CourseForm allCourses={courses} /></div>
       </details>
     </div>
   );

@@ -4,6 +4,7 @@ import { db } from "@/lib/db";
 import { requireCustomer, logoutCustomer } from "@/lib/customer-auth";
 import { formatDateTime, formatTime } from "@/lib/utils";
 import { bookAsCustomer } from "@/app/customer-actions";
+import { AvailabilityCalendar, type CalItem } from "@/components/booking/AvailabilityCalendar";
 import { redirect } from "next/navigation";
 
 export const metadata = { title: "Mein Bereich", robots: { index: false } };
@@ -31,10 +32,16 @@ export default async function MeinBereich() {
   });
   if (!customer) redirect("/anmelden");
 
-  // gesperrte Kurse (Phase 2: Voraussetzungen) ausblenden
+  // Zugangssteuerung: manuell gesperrte + absolvierte Kurse
   const lockedCourseIds = new Set(
     customer.courseAccess.filter((a) => a.status === "LOCKED").map((a) => a.courseId),
   );
+  const completedCourseIds = new Set(
+    customer.courseAccess.filter((a) => a.status === "COMPLETED").map((a) => a.courseId),
+  );
+  // Kurs buchbar, wenn keine Voraussetzung ODER Voraussetzung absolviert
+  const prereqMet = (requiresCourseId: string | null) =>
+    !requiresCourseId || completedCourseIds.has(requiresCourseId);
 
   const sessions = await db.courseSession.findMany({
     where: { status: "SCHEDULED", startsAt: { gte: now } },
@@ -45,7 +52,13 @@ export default async function MeinBereich() {
     },
   });
   const bookable = sessions
-    .filter((s) => s.course.isActive && s.course.isBookable && !lockedCourseIds.has(s.courseId))
+    .filter(
+      (s) =>
+        s.course.isActive &&
+        s.course.isBookable &&
+        !lockedCourseIds.has(s.courseId) &&
+        prereqMet(s.course.requiresCourseId),
+    )
     .map((s) => ({ ...s, free: Math.max(0, s.capacity - s.bookings.reduce((a, b) => a + b.people, 0)) }));
 
   const upcoming = customer.bookings.filter(
@@ -105,9 +118,20 @@ export default async function MeinBereich() {
           </div>
         </div>
 
-        {/* Buchbare Termine */}
-        <div className="mt-10">
-          <h2 className="font-[family-name:var(--font-heading)] text-xl text-navy">Termine buchen</h2>
+        {/* Verfügbarkeits-Kalender + buchbare Termine */}
+        <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_1.4fr]">
+          <div>
+            <h2 className="mb-4 font-[family-name:var(--font-heading)] text-xl text-navy">Verfügbare Tage</h2>
+            <AvailabilityCalendar
+              items={bookable.map((s): CalItem => ({
+                date: `${s.startsAt.getFullYear()}-${String(s.startsAt.getMonth() + 1).padStart(2, "0")}-${String(s.startsAt.getDate()).padStart(2, "0")}`,
+                color: s.course.color,
+                title: s.course.title,
+              }))}
+            />
+          </div>
+          <div>
+          <h2 className="mb-1 font-[family-name:var(--font-heading)] text-xl text-navy">Termine buchen</h2>
           {bookable.length === 0 ? (
             <p className="mt-3 text-muted">Aktuell sind keine Termine für dich freigegeben.</p>
           ) : (
@@ -132,6 +156,7 @@ export default async function MeinBereich() {
             </div>
           )}
           <p className="mt-4 text-xs text-muted">Die Bezahlung erfolgt wie gewohnt über Chiara (lexware). Nach der Buchung erhältst du eine Bestätigung.</p>
+          </div>
         </div>
       </Container>
     </section>

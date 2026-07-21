@@ -94,6 +94,21 @@ async function main() {
     },
   });
 
+  // ---------- Demo Online-Kurs (Videothek) ----------
+  await db.videoProduct.create({
+    data: {
+      slug: "trick-aufbau-pfote-geben",
+      title: "Trick-Aufbau: Pfote geben",
+      description:
+        "In diesem kurzen Video zeige ich dir Schritt für Schritt, wie du deinem Hund sauber „Pfote geben" beibringst – mit positiver Verstärkung und ohne Frust.",
+      priceCents: 1000,
+      videoUrl: "",
+      previewUrl: "",
+      isPublished: true,
+      order: 0,
+    },
+  });
+
   // ---------- Einstellungen ----------
   console.log("→ Einstellungen …");
   const settings: Record<string, string> = {

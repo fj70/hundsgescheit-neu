@@ -45,9 +45,10 @@ export function Footer({ settings }: { settings: SiteSettings }) {
           <h4 className="font-[family-name:var(--font-heading)] text-base text-navy">Allgemeines</h4>
           <span className="mt-2 mb-4 block h-0.5 w-10 bg-secondary/50" />
           <ul className="space-y-2.5 text-sm">
+            <DashLink href="/online-kurse">Online-Kurse</DashLink>
+            <DashLink href="/kontakt">Kontakt</DashLink>
             <DashLink href="/datenschutz">Datenschutz</DashLink>
             <DashLink href="/impressum">Impressum</DashLink>
-            <DashLink href="/kontakt">Kontakt</DashLink>
             <DashLink href="/agb">AGB´s</DashLink>
           </ul>
         </div>
