@@ -14,8 +14,8 @@ export function Header({ nav, siteName }: { nav: NavItem[]; siteName: string }) 
 
   return (
     <header className="sticky top-0 z-50 border-b bg-white/95 backdrop-blur">
-      <Container className="flex items-center justify-between gap-4 py-3">
-        <Link href="/" className="flex items-center shrink-0" aria-label={siteName}>
+      <Container className="relative flex items-center justify-between gap-4 py-3">
+        <Link href="/" className="mx-auto flex shrink-0 items-center lg:mx-0" aria-label={siteName}>
           <Image
             src="/uploads/2025/01/logo-1024x365.png"
             alt={siteName}
@@ -74,7 +74,7 @@ export function Header({ nav, siteName }: { nav: NavItem[]; siteName: string }) 
 
         {/* Mobile-Toggle */}
         <button
-          className="lg:hidden p-2 text-primary"
+          className="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-primary lg:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label="Menü"
         >
