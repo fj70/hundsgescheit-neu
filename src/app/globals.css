@@ -70,7 +70,9 @@ h1, h2, h3, h4 {
   font-weight: 800; /* Outfit Bold, gemischte Schreibung wie im Original */
   line-height: 1.2;
   letter-spacing: -0.01em;
-  color: var(--foreground);
+  /* Keine feste Farbe: Überschriften erben (dunkel auf hell, weiß auf farbigem Grund).
+     Wo eine bestimmte Farbe gewünscht ist, setzt die jeweilige Klasse sie (z. B. text-navy). */
+  color: inherit;
 }
 
 /* Fliesstext aus dem CMS (RichText/Blog) hübsch rendern */
