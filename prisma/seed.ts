@@ -41,7 +41,11 @@ function section(type: string, data: Record<string, unknown>) {
 
 async function main() {
   console.log("→ Lösche vorhandene Daten …");
+  await db.purchase.deleteMany();
+  await db.videoProduct.deleteMany();
+  await db.customerCourseAccess.deleteMany();
   await db.booking.deleteMany();
+  await db.customer.deleteMany();
   await db.courseSession.deleteMany();
   await db.course.deleteMany();
   await db.section.deleteMany();
