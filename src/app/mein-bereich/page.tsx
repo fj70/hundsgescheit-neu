@@ -3,7 +3,7 @@ import { Container } from "@/components/ui/Container";
 import { db } from "@/lib/db";
 import { requireCustomer, logoutCustomer } from "@/lib/customer-auth";
 import { formatDateTime, formatTime } from "@/lib/utils";
-import { bookAsCustomer } from "@/app/customer-actions";
+import { bookAsCustomer, waitlistAsCustomer, cancelBooking } from "@/app/customer-actions";
 import { AvailabilityCalendar, type CalItem } from "@/components/booking/AvailabilityCalendar";
 import { redirect } from "next/navigation";
 
@@ -64,6 +64,9 @@ export default async function MeinBereich() {
   const upcoming = customer.bookings.filter(
     (b) => b.status !== "CANCELLED" && b.session.startsAt >= now,
   );
+  // Termine, für die der Kunde bereits eine aktive Buchung/Warteliste hat
+  const myBySession = new Map<string, string>();
+  for (const b of upcoming) myBySession.set(b.sessionId, b.status);
 
   return (
     <section className="py-12">
@@ -105,14 +108,22 @@ export default async function MeinBereich() {
               <p className="mt-3 text-sm text-muted">Noch keine kommenden Buchungen. Wähle unten einen Termin.</p>
             ) : (
               <ul className="mt-3 space-y-2">
-                {upcoming.map((b) => (
-                  <li key={b.id} className="flex items-center justify-between rounded-lg bg-soft-2/50 px-3 py-2 text-sm">
-                    <span><span className="inline-block h-2.5 w-2.5 rounded-full" style={{ backgroundColor: b.session.course.color }} /> {b.session.course.title} – {formatDateTime(b.session.startsAt)}</span>
-                    <span className={`rounded-full px-2 py-0.5 text-xs ${b.status === "CONFIRMED" ? "bg-green-100 text-green-700" : "bg-yellow-100 text-yellow-700"}`}>
-                      {b.status === "CONFIRMED" ? "bestätigt" : "angefragt"}
-                    </span>
-                  </li>
-                ))}
+                {upcoming.map((b) => {
+                  const label = b.status === "CONFIRMED" ? "bestätigt" : b.status === "WAITLIST" ? "Warteliste" : "angefragt";
+                  const pill = b.status === "CONFIRMED" ? "bg-green-100 text-green-700" : b.status === "WAITLIST" ? "bg-blue-100 text-blue-700" : "bg-yellow-100 text-yellow-700";
+                  return (
+                    <li key={b.id} className="flex flex-wrap items-center justify-between gap-2 rounded-lg bg-soft-2/50 px-3 py-2 text-sm">
+                      <span className="flex items-center gap-2"><span className="inline-block h-2.5 w-2.5 shrink-0 rounded-full" style={{ backgroundColor: b.session.course.color }} aria-hidden /> {b.session.course.title} – {formatDateTime(b.session.startsAt)}</span>
+                      <span className="flex items-center gap-2">
+                        <span className={`rounded-full px-2 py-0.5 text-xs ${pill}`}>{label}</span>
+                        <form action={cancelBooking}>
+                          <input type="hidden" name="bookingId" value={b.id} />
+                          <button className="rounded-full border border-red-200 px-2.5 py-0.5 text-xs text-red-600 transition-colors hover:bg-red-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-400" aria-label={`Buchung ${b.session.course.title} am ${formatDateTime(b.session.startsAt)} stornieren`}>Stornieren</button>
+                        </form>
+                      </span>
+                    </li>
+                  );
+                })}
               </ul>
             )}
           </div>
@@ -144,11 +155,21 @@ export default async function MeinBereich() {
                   </div>
                   <div className="mt-1 text-sm text-muted">{formatDateTime(s.startsAt)}–{formatTime(s.endsAt)}{s.location ? ` · ${s.location}` : ""}</div>
                   <div className={`mt-1 text-xs ${s.free > 0 ? "text-muted" : "text-red-600"}`}>{s.free > 0 ? `${s.free} Plätze frei` : "ausgebucht"}</div>
-                  {s.free > 0 && (
+                  {myBySession.has(s.id) ? (
+                    <p className="mt-3 text-xs font-semibold text-primary">
+                      {myBySession.get(s.id) === "WAITLIST" ? "Du stehst auf der Warteliste ✓" : myBySession.get(s.id) === "CONFIRMED" ? "Platz bestätigt ✓" : "Bereits angefragt ✓"}
+                    </p>
+                  ) : s.free > 0 ? (
                     <form action={bookAsCustomer} className="mt-3 flex items-center gap-2">
                       <input type="hidden" name="sessionId" value={s.id} />
-                      <input name="people" type="number" min={1} max={s.free} defaultValue={1} className="w-16 rounded-lg border px-2 py-1.5 text-sm" />
-                      <button className="rounded-full bg-primary px-4 py-1.5 text-sm font-semibold text-white">Buchen</button>
+                      <label className="sr-only" htmlFor={`people-${s.id}`}>Anzahl Personen</label>
+                      <input id={`people-${s.id}`} name="people" type="number" min={1} max={s.free} defaultValue={1} className="w-16 rounded-lg border px-2 py-1.5 text-sm" />
+                      <button className="rounded-full bg-primary px-4 py-1.5 text-sm font-semibold text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">Buchen</button>
+                    </form>
+                  ) : (
+                    <form action={waitlistAsCustomer} className="mt-3">
+                      <input type="hidden" name="sessionId" value={s.id} />
+                      <button className="rounded-full border-2 border-primary px-4 py-1.5 text-sm font-semibold text-primary transition-colors hover:bg-primary hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2">Auf die Warteliste</button>
                     </form>
                   )}
                 </div>

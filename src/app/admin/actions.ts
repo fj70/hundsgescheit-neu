@@ -400,3 +400,33 @@ export async function saveSettings(formData: FormData) {
   refreshPublic();
   revalidatePath("/admin/einstellungen");
 }
+
+// ---------- Käufe / Zahlungen (Barzahlung manuell freischalten) ----------
+export async function releasePurchase(formData: FormData) {
+  await guard();
+  const id = String(formData.get("id"));
+  const purchase = await db.purchase.update({
+    where: { id },
+    data: { status: "PAID" },
+    include: { product: true, customer: true },
+  });
+  // Kund:in informieren, dass das Video jetzt freigeschaltet ist
+  const { sendMail, mailLayout } = await import("@/lib/mail");
+  await sendMail({
+    to: purchase.customer.email,
+    subject: `Freigeschaltet: ${purchase.product.title}`,
+    html: mailLayout("Dein Video ist freigeschaltet!", `
+      <p>Hallo ${purchase.customer.firstName || ""},</p>
+      <p>deine Zahlung ist eingegangen – <b>${purchase.product.title}</b> ist ab sofort in deinem Bereich verfügbar.</p>
+      <p>Viel Freude beim Ansehen!<br>Chiara</p>`),
+  });
+  revalidatePath("/admin/videos");
+  revalidatePath("/online-kurse", "layout");
+}
+
+export async function cancelPurchase(formData: FormData) {
+  await guard();
+  const id = String(formData.get("id"));
+  await db.purchase.update({ where: { id }, data: { status: "CANCELLED" } });
+  revalidatePath("/admin/videos");
+}

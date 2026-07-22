@@ -5,6 +5,7 @@ import { ButtonLink } from "@/components/ui/Button";
 import { parseSectionData } from "@/lib/sections";
 import { CoursesSection } from "./CoursesSection";
 import { ContactSection } from "./ContactSection";
+import { YouTubeFacade, youtubeId } from "./YouTubeFacade";
 
 type SectionRow = { id: string; type: string; data: string; isVisible: boolean };
 
@@ -312,6 +313,99 @@ function SingleSection({ section, altBg }: { section: SectionRow; altBg: boolean
                 </details>
               ))}
             </div>
+          </Container>
+        </section>
+      );
+    }
+
+    case "SOCIAL": {
+      const ytChannel = s(d, "youtubeChannel");
+      const igProfile = s(d, "instagramProfile");
+      const videos = arr(d, "videos")
+        .map((v) => ({ id: youtubeId(typeof v.url === "string" ? v.url : ""), title: typeof v.title === "string" ? v.title : "" }))
+        .filter((v) => v.id);
+      const tiles = arr(d, "instagramTiles").filter((t) => typeof t.image === "string" && t.image);
+      return (
+        <section className="bg-soft py-20">
+          <Container>
+            {s(d, "heading") && <SectionHeading center>{s(d, "heading")}</SectionHeading>}
+            {s(d, "intro") && <p className="mx-auto mt-5 max-w-2xl text-center text-lg text-muted">{s(d, "intro")}</p>}
+
+            {videos.length > 0 && (
+              <div className="mt-12">
+                <div className="mb-5 flex items-center justify-center gap-2 text-navy">
+                  <svg viewBox="0 0 24 24" className="h-6 w-6 text-[#ff0000]" fill="currentColor" aria-hidden>
+                    <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8ZM9.5 15.5v-7l6.3 3.5-6.3 3.5Z" />
+                  </svg>
+                  <h3 className="font-[family-name:var(--font-heading)] text-xl">Meine Videos auf YouTube</h3>
+                </div>
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                  {videos.map((v, i) => (
+                    <YouTubeFacade key={i} id={v.id} title={v.title} />
+                  ))}
+                </div>
+                {ytChannel && (
+                  <div className="mt-8 text-center">
+                    <a
+                      href={ytChannel}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-[#ff0000] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-transform hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    >
+                      Kanal auf YouTube abonnieren
+                    </a>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {(tiles.length > 0 || igProfile) && (
+              <div className="mt-16">
+                <div className="mb-5 flex items-center justify-center gap-2 text-navy">
+                  <svg viewBox="0 0 24 24" className="h-6 w-6" fill="url(#iggrad)" aria-hidden>
+                    <defs>
+                      <linearGradient id="iggrad" x1="0" y1="1" x2="1" y2="0">
+                        <stop offset="0" stopColor="#feda75" />
+                        <stop offset="0.5" stopColor="#d62976" />
+                        <stop offset="1" stopColor="#4f5bd5" />
+                      </linearGradient>
+                    </defs>
+                    <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.2.4.4 1 .4 2.2.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.2-1 .4-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4a3.7 3.7 0 0 1-1.4-.9 3.7 3.7 0 0 1-.9-1.4c-.2-.4-.4-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.2 1-.4 2.2-.4C8.4 2.2 8.8 2.2 12 2.2Zm0 3.2A6.6 6.6 0 1 0 18.6 12 6.6 6.6 0 0 0 12 5.4Zm0 10.9A4.3 4.3 0 1 1 16.3 12 4.3 4.3 0 0 1 12 16.3Zm6.9-11.1a1.5 1.5 0 1 0 1.5 1.5 1.5 1.5 0 0 0-1.5-1.5Z" />
+                  </svg>
+                  <h3 className="font-[family-name:var(--font-heading)] text-xl">Auf Instagram</h3>
+                </div>
+                {tiles.length > 0 && (
+                  <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+                    {tiles.map((t, i) => {
+                      const href = typeof t.href === "string" && t.href ? t.href : igProfile;
+                      return (
+                        <a
+                          key={i}
+                          href={href || "#"}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group relative block aspect-square overflow-hidden rounded-[16px] shadow-sm ring-1 ring-black/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                        >
+                          <Image src={String(t.image)} alt={String(t.alt ?? "Instagram-Beitrag")} fill sizes="240px" className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                        </a>
+                      );
+                    })}
+                  </div>
+                )}
+                {igProfile && (
+                  <div className="mt-8 text-center">
+                    <a
+                      href={igProfile}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-gradient-to-tr from-[#feda75] via-[#d62976] to-[#4f5bd5] px-6 py-3 text-sm font-semibold text-white shadow-sm transition-transform hover:scale-[1.03] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                    >
+                      Auf Instagram folgen
+                    </a>
+                  </div>
+                )}
+              </div>
+            )}
           </Container>
         </section>
       );

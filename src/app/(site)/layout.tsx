@@ -11,8 +11,14 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
     <>
       <style dangerouslySetInnerHTML={{ __html: colorCssVars(settings) }} />
       <LocalBusinessJsonLd settings={settings} />
+      <a
+        href="#inhalt"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-primary focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-white focus:shadow-lg"
+      >
+        Zum Inhalt springen
+      </a>
       <Header nav={nav} siteName={settings.siteName} />
-      <main className="flex-1">{children}</main>
+      <main id="inhalt" className="flex-1">{children}</main>
       <Footer settings={settings} />
       <CookieBanner />
     </>

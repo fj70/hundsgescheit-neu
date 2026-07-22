@@ -251,6 +251,7 @@ model Purchase {
   product         VideoProduct @relation(fields: [productId], references: [id], onDelete: Cascade)
   productId       String
   status          String       @default("PENDING") // PENDING | PAID | CANCELLED
+  paymentMethod   String       @default("STRIPE") // STRIPE | CASH | PAYPAL
   stripeSessionId String?
   amountCents     Int          @default(0)
   createdAt       DateTime     @default(now())

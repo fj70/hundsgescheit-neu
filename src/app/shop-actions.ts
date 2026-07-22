@@ -55,3 +55,44 @@ export async function startCheckout(formData: FormData): Promise<void> {
 
   redirect(checkout.url!);
 }
+
+// Barzahlung anfragen: Chiara schaltet das Video nach Zahlungseingang manuell frei.
+export async function requestCashPurchase(formData: FormData): Promise<void> {
+  const session = await getCustomerSession();
+  if (!session) redirect("/anmelden");
+  const productId = String(formData.get("productId"));
+
+  const [product, customer] = await Promise.all([
+    db.videoProduct.findUnique({ where: { id: productId } }),
+    db.customer.findUnique({ where: { id: session.id } }),
+  ]);
+  if (!product || !product.isPublished || !customer) redirect("/online-kurse");
+
+  const existing = await db.purchase.findUnique({
+    where: { customerId_productId: { customerId: customer.id, productId } },
+  });
+  if (existing?.status === "PAID") redirect(`/online-kurse/${product.slug}`);
+
+  await db.purchase.upsert({
+    where: { customerId_productId: { customerId: customer.id, productId } },
+    update: { status: "PENDING", paymentMethod: "CASH", amountCents: product.priceCents },
+    create: { customerId: customer.id, productId, status: "PENDING", paymentMethod: "CASH", amountCents: product.priceCents },
+  });
+
+  // Chiara benachrichtigen (falls SMTP hinterlegt)
+  const { sendMail, notifyAddress, mailLayout } = await import("@/lib/mail");
+  const { formatPrice } = await import("@/lib/utils");
+  const to = await notifyAddress();
+  if (to) {
+    await sendMail({
+      to,
+      subject: `Barzahlung angefragt: ${product.title}`,
+      replyTo: customer.email,
+      html: mailLayout("Neue Barzahlungs-Anfrage", `
+        <p><b>${customer.firstName} ${customer.lastName}</b> (${customer.email}) möchte per Barzahlung kaufen:</p>
+        <p><b>${product.title}</b> · ${formatPrice(product.priceCents)}</p>
+        <p>Nach Zahlungseingang im Adminbereich unter „Online-Kurse → Offene Zahlungen" freischalten.</p>`),
+    });
+  }
+  redirect(`/online-kurse/${product.slug}?cash=1`);
+}

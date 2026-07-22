@@ -262,6 +262,46 @@ export const SECTION_TYPES: SectionTypeDef[] = [
     defaultData: { heading: "Kurse & Termine", intro: "" },
   },
   {
+    type: "SOCIAL",
+    label: "Social Media (YouTube & Instagram)",
+    description: "Zeigt YouTube-Videos (DSGVO-freundlich per Klick) und einen Instagram-Bereich mit Profil-Link.",
+    fields: [
+      { key: "heading", label: "Überschrift", type: "text" },
+      { key: "intro", label: "Einleitung", type: "textarea" },
+      { key: "youtubeChannel", label: "YouTube-Kanal (URL)", type: "text", help: "z. B. https://www.youtube.com/@Hundsgescheit" },
+      {
+        key: "videos",
+        label: "YouTube-Videos",
+        type: "list",
+        help: "Videolink oder Video-ID einfügen. Erst per Klick wird das Video geladen (kein Cookie vorab).",
+        itemFields: [
+          { key: "url", label: "Video-Link oder ID", type: "text" },
+          { key: "title", label: "Titel (optional)", type: "text" },
+        ],
+      },
+      { key: "instagramProfile", label: "Instagram-Profil (URL)", type: "text", help: "z. B. https://www.instagram.com/hundsgescheit/" },
+      {
+        key: "instagramTiles",
+        label: "Instagram-Kacheln (Bilder)",
+        type: "list",
+        help: "Optional: Bilder deiner schönsten Beiträge – sie verlinken zum Profil bzw. zum jeweiligen Beitrag.",
+        itemFields: [
+          { key: "image", label: "Bild", type: "image" },
+          { key: "href", label: "Link zum Beitrag (optional)", type: "text" },
+          { key: "alt", label: "Bildbeschreibung", type: "text" },
+        ],
+      },
+    ],
+    defaultData: {
+      heading: "Folge mir auf Social Media",
+      intro: "Trainingstipps, Einblicke und Momente aus dem Alltag – schau gern vorbei.",
+      youtubeChannel: "https://www.youtube.com/@Hundsgescheit",
+      videos: [],
+      instagramProfile: "https://www.instagram.com/hundsgescheit/",
+      instagramTiles: [],
+    },
+  },
+  {
     type: "CTA",
     label: "Aufruf (Call-to-Action)",
     description: "Farbiger Block mit Aufforderung und Button.",

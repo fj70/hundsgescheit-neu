@@ -1,7 +1,7 @@
 import { db } from "@/lib/db";
-import { saveVideoProduct, deleteVideoProduct } from "@/app/admin/actions";
+import { saveVideoProduct, deleteVideoProduct, releasePurchase, cancelPurchase } from "@/app/admin/actions";
 import { stripeConfigured } from "@/lib/stripe";
-import { formatPrice } from "@/lib/utils";
+import { formatPrice, formatDateTime } from "@/lib/utils";
 
 const input = "w-full rounded-lg border bg-white px-3 py-2 text-sm";
 
@@ -42,10 +42,17 @@ function VideoForm({ p }: { p?: any }) {
 }
 
 export default async function AdminVideos() {
-  const products = await db.videoProduct.findMany({
-    orderBy: [{ order: "asc" }, { createdAt: "desc" }],
-    include: { _count: { select: { purchases: true } } },
-  });
+  const [products, pendingPurchases] = await Promise.all([
+    db.videoProduct.findMany({
+      orderBy: [{ order: "asc" }, { createdAt: "desc" }],
+      include: { _count: { select: { purchases: true } } },
+    }),
+    db.purchase.findMany({
+      where: { status: "PENDING" },
+      orderBy: { createdAt: "asc" },
+      include: { product: true, customer: true },
+    }),
+  ]);
 
   return (
     <div className="space-y-6">
@@ -56,11 +63,46 @@ export default async function AdminVideos() {
 
       {!stripeConfigured() && (
         <div className="rounded-[20px] border border-yellow-300 bg-yellow-50 p-4 text-sm text-yellow-800">
-          <strong>Bezahlung noch nicht aktiv:</strong> Sobald der Stripe-Zugang (API-Keys) hinterlegt ist,
-          können Kunden die Videos kaufen. Du kannst Videos schon anlegen und veröffentlichen –
-          der Kauf-Button zeigt so lange „bald verfügbar".
+          <strong>Online-Bezahlung noch nicht aktiv:</strong> Sobald der Stripe-Zugang (API-Keys) hinterlegt ist,
+          können Kunden direkt online kaufen. <strong>Barzahlung funktioniert aber schon jetzt</strong> –
+          Kunden fragen an, du schaltest nach Zahlungseingang unten frei.
         </div>
       )}
+
+      {/* Offene Zahlungen — vor allem Barzahlungen manuell freischalten */}
+      <div className="rounded-[20px] border bg-white p-5">
+        <h2 className="font-[family-name:var(--font-heading)] text-lg text-navy">Offene Zahlungen</h2>
+        {pendingPurchases.length === 0 ? (
+          <p className="mt-2 text-sm text-muted">Aktuell keine offenen Zahlungen.</p>
+        ) : (
+          <ul className="mt-3 divide-y">
+            {pendingPurchases.map((p) => (
+              <li key={p.id} className="flex flex-wrap items-center justify-between gap-3 py-3 text-sm">
+                <div>
+                  <div className="font-semibold text-navy">{p.product.title} · {formatPrice(p.amountCents || p.product.priceCents)}</div>
+                  <div className="text-muted">
+                    {p.customer.firstName} {p.customer.lastName} ({p.customer.email}) ·{" "}
+                    <span className={`rounded-full px-2 py-0.5 text-xs ${p.paymentMethod === "CASH" ? "bg-amber-100 text-amber-800" : "bg-slate-100 text-slate-700"}`}>
+                      {p.paymentMethod === "CASH" ? "Barzahlung" : p.paymentMethod === "PAYPAL" ? "PayPal" : "Online"}
+                    </span>{" "}
+                    · angefragt {formatDateTime(p.createdAt)}
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <form action={releasePurchase}>
+                    <input type="hidden" name="id" value={p.id} />
+                    <button className="rounded-full bg-green-600 px-4 py-1.5 text-xs font-semibold text-white hover:bg-green-700">Zahlung bestätigt · freischalten</button>
+                  </form>
+                  <form action={cancelPurchase}>
+                    <input type="hidden" name="id" value={p.id} />
+                    <button className="rounded-full border px-3 py-1.5 text-xs text-muted hover:bg-soft">Ablehnen</button>
+                  </form>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
 
       {products.map((p) => (
         <details key={p.id} className="rounded-[20px] border bg-white p-5">
