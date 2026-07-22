@@ -280,6 +280,22 @@ export async function inviteCustomer(formData: FormData) {
       notes: String(formData.get("notes") || ""),
     },
   });
+
+  // Einladungs-Mail mit Registrierungs-Link (falls SMTP hinterlegt)
+  const base = process.env.SITE_URL || "";
+  const link = `${base}/registrieren?token=${token}`;
+  const { sendMail, mailLayout } = await import("@/lib/mail");
+  await sendMail({
+    to: email,
+    subject: "Dein Zugang zum Hundsgescheit-Buchungsbereich",
+    html: mailLayout("Willkommen im Stammkunden-Bereich", `
+      <p>Hallo${formData.get("firstName") ? " " + String(formData.get("firstName")) : ""},</p>
+      <p>du bekommst Zugang zum Buchungsbereich von Hundsgescheit. Bitte registriere dich
+      einmalig über den folgenden Link – danach kannst du deine Kurse selbst buchen:</p>
+      <p style="margin:20px 0"><a href="${link}" style="background:#125A70;color:#fff;text-decoration:none;padding:12px 22px;border-radius:999px;font-weight:bold">Jetzt registrieren</a></p>
+      <p style="font-size:13px;color:#5c6b74">Falls der Button nicht geht: ${link}</p>
+      <p>Liebe Grüße<br>Chiara</p>`),
+  });
   revalidatePath("/admin/kunden");
 }
 
@@ -370,6 +386,7 @@ export async function saveSettings(formData: FormData) {
     "country", "lat", "lng", "openingHours", "instagram", "facebook",
     "metaTitleDefault", "metaDescriptionDefault",
     "colorPrimary", "colorSecondary", "colorAccent", "colorNavy",
+    "smtpHost", "smtpPort", "smtpUser", "smtpPass", "smtpFrom", "smtpSecure", "mailTo",
   ];
   await Promise.all(
     keys.map((k) =>

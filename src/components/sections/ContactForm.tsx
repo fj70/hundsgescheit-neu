@@ -22,6 +22,8 @@ export function ContactForm({ subjects }: { subjects: string[] }) {
 
   return (
     <form action={action} className="space-y-4">
+      {/* Honeypot (für Menschen unsichtbar) */}
+      <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 opacity-0" />
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <input name="name" placeholder="Dein Name" className={field} />

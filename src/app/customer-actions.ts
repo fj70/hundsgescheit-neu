@@ -118,6 +118,25 @@ export async function bookAsCustomer(formData: FormData): Promise<void> {
       status: "PENDING",
     },
   });
+
+  // Bestätigung an Kund:in + Info an Chiara (falls SMTP hinterlegt)
+  const { formatDateTime } = await import("@/lib/utils");
+  const { sendMail, notifyAddress, mailLayout } = await import("@/lib/mail");
+  const termin = `${cs.course.title} am ${formatDateTime(cs.startsAt)}`;
+  await sendMail({
+    to: customer.email,
+    subject: `Buchungsanfrage erhalten – ${cs.course.title}`,
+    html: mailLayout("Deine Buchungsanfrage ist da!", `
+      <p>Hallo ${customer.firstName || ""},</p>
+      <p>deine Anfrage für <b>${termin}</b> (${people} Pers.) ist eingegangen.
+      Chiara bestätigt deinen Platz und meldet sich bei dir.</p>
+      <p>Liebe Grüße<br>Chiara</p>`),
+  });
+  const to = await notifyAddress();
+  if (to) {
+    await sendMail({ to, subject: `Neue Buchung: ${termin}`, replyTo: customer.email,
+      html: mailLayout("Neue Buchungsanfrage", `<p><b>${customer.firstName} ${customer.lastName}</b> (${customer.email})</p><p>${termin} · ${people} Pers.</p>`) });
+  }
   const { revalidatePath } = await import("next/cache");
   revalidatePath("/mein-bereich");
 }

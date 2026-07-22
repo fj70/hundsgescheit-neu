@@ -53,6 +53,26 @@ export default async function AdminEinstellungen() {
           </div>
         </div>
 
+        {/* E-Mail-Versand (SMTP) */}
+        <div className="rounded-[20px] border bg-white p-6">
+          <h2 className="mb-1 font-[family-name:var(--font-heading)] text-lg text-navy">E-Mail-Versand (SMTP)</h2>
+          <p className="mb-4 text-sm text-muted">Zugangsdaten deines Postfachs. Damit versendet die Seite Kontakt-Benachrichtigungen, Einladungen und Buchungsbestätigungen. Solange leer, wird nichts gemailt.</p>
+          <div className="grid gap-4 sm:grid-cols-2">
+            <div><label className="mb-1 block text-sm font-medium">SMTP-Server (Host)</label><input name="smtpHost" defaultValue={s.smtpHost} placeholder="z. B. smtp.strato.de" className={input} /></div>
+            <div><label className="mb-1 block text-sm font-medium">Port</label><input name="smtpPort" defaultValue={s.smtpPort} placeholder="587" className={input} /></div>
+            <div><label className="mb-1 block text-sm font-medium">Benutzer (E-Mail)</label><input name="smtpUser" defaultValue={s.smtpUser} className={input} /></div>
+            <div><label className="mb-1 block text-sm font-medium">Passwort</label><input name="smtpPass" type="password" defaultValue={s.smtpPass} className={input} /></div>
+            <div><label className="mb-1 block text-sm font-medium">Absender-Adresse</label><input name="smtpFrom" defaultValue={s.smtpFrom} placeholder="info@hundsgescheit.de" className={input} /></div>
+            <div><label className="mb-1 block text-sm font-medium">Verschlüsselung</label>
+              <select name="smtpSecure" defaultValue={s.smtpSecure} className={input}>
+                <option value="false">STARTTLS (Port 587)</option>
+                <option value="true">SSL/TLS (Port 465)</option>
+              </select>
+            </div>
+            <div className="sm:col-span-2"><label className="mb-1 block text-sm font-medium">Benachrichtigungen an</label><input name="mailTo" defaultValue={s.mailTo} placeholder="Standard: deine E-Mail oben" className={input} /></div>
+          </div>
+        </div>
+
         {/* Kontakt & SEO */}
         <div className="grid gap-4 rounded-[20px] border bg-white p-6 sm:grid-cols-2">
           {fields.map((f) => (

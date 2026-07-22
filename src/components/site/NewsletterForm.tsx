@@ -14,6 +14,7 @@ export function NewsletterForm() {
 
   return (
     <form action={action} className="space-y-2">
+      <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 opacity-0" />
       <input
         name="email"
         type="email"

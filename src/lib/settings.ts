@@ -23,6 +23,14 @@ export type SiteSettings = {
   colorSecondary: string;
   colorAccent: string;
   colorNavy: string;
+  // E-Mail-Versand (SMTP) — im Backend unter Einstellungen pflegbar
+  smtpHost: string;
+  smtpPort: string;
+  smtpUser: string;
+  smtpPass: string;
+  smtpFrom: string;
+  smtpSecure: string; // "true" = SSL (Port 465), sonst STARTTLS
+  mailTo: string; // Empfänger für Kontakt-/Buchungs-Benachrichtigungen (Standard: E-Mail)
 };
 
 export const DEFAULT_SETTINGS: SiteSettings = {
@@ -47,6 +55,13 @@ export const DEFAULT_SETTINGS: SiteSettings = {
   colorSecondary: "#4B84A4",
   colorAccent: "#70CFC0",
   colorNavy: "#012D67",
+  smtpHost: "",
+  smtpPort: "587",
+  smtpUser: "",
+  smtpPass: "",
+  smtpFrom: "",
+  smtpSecure: "false",
+  mailTo: "",
 };
 
 // Die editierbaren Hauptfarben als Palette (fuer Editor-Vorschlaege + CSS-Injektion).

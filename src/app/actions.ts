@@ -17,6 +17,8 @@ const contactSchema = z.object({
 export type FormState = { ok: boolean; error?: string; fieldErrors?: Record<string, string> };
 
 export async function submitContact(_prev: FormState, formData: FormData): Promise<FormState> {
+  // Honeypot: von Bots ausgefülltes verstecktes Feld -> stillschweigend „erfolgreich"
+  if (String(formData.get("website") || "").trim()) return { ok: true };
   const parsed = contactSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
@@ -33,21 +35,41 @@ export async function submitContact(_prev: FormState, formData: FormData): Promi
   if (!parsed.data.agb) {
     return { ok: false, error: "Bitte akzeptiere die AGB.", fieldErrors: { agb: "Erforderlich" } };
   }
+  const d = parsed.data;
   await db.enquiry.create({
-    data: {
-      name: parsed.data.name,
-      email: parsed.data.email,
-      phone: parsed.data.phone,
-      subject: parsed.data.subject,
-      message: parsed.data.message,
-    },
+    data: { name: d.name, email: d.email, phone: d.phone, subject: d.subject, message: d.message },
   });
-  // TODO: E-Mail-Benachrichtigung an Chiara (SMTP) — nach Umzug auf Coolify.
+
+  // Benachrichtigung an Chiara + Bestätigung an Absender (falls SMTP hinterlegt)
+  const { sendMail, notifyAddress, mailLayout } = await import("@/lib/mail");
+  const to = await notifyAddress();
+  if (to) {
+    await sendMail({
+      to,
+      subject: `Neue Kontaktanfrage von ${d.name}`,
+      replyTo: d.email,
+      html: mailLayout("Neue Kontaktanfrage", `
+        <p><b>Name:</b> ${d.name}</p>
+        <p><b>E-Mail:</b> ${d.email}</p>
+        ${d.phone ? `<p><b>Telefon:</b> ${d.phone}</p>` : ""}
+        ${d.subject ? `<p><b>Betreff:</b> ${d.subject}</p>` : ""}
+        <p><b>Nachricht:</b><br>${d.message.replace(/\n/g, "<br>")}</p>`),
+    });
+  }
+  await sendMail({
+    to: d.email,
+    subject: "Danke für deine Nachricht – Hundsgescheit",
+    html: mailLayout("Danke für deine Nachricht!", `
+      <p>Hallo ${d.name},</p>
+      <p>vielen Dank für deine Anfrage – ich melde mich zeitnah bei dir zurück.</p>
+      <p>Liebe Grüße<br>Chiara</p>`),
+  });
   return { ok: true };
 }
 
 // ---------- Newsletter-Anmeldung ----------
 export async function subscribeNewsletter(_prev: FormState, formData: FormData): Promise<FormState> {
+  if (String(formData.get("website") || "").trim()) return { ok: true };
   const email = String(formData.get("email") || "").trim();
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
     return { ok: false, error: "Bitte gültige E-Mail angeben." };
