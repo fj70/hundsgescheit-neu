@@ -6,8 +6,8 @@ import { db } from "@/lib/db";
 import { formatPrice } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Online-Kurse",
-  description: "Kurze Trainingsvideos zum Anschauen – Tricks, Alltag und mehr, jederzeit abrufbar.",
+  title: "Online-Kurse Hundetraining – Video-Anleitungen",
+  description: "Kurze Trainingsvideos zum Anschauen – Tricks, Alltag und mehr rund ums Hundetraining, jederzeit abrufbar.",
 };
 
 export default async function OnlineKurse() {

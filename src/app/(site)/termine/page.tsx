@@ -4,8 +4,8 @@ import { db } from "@/lib/db";
 import { formatDateTime, formatTime } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Termine & Buchung",
-  description: "Freie Termine für Gruppencoaching, Social Walk und mehr – jetzt online buchen.",
+  title: "Kurse & Termine buchen – Hundetraining Essen",
+  description: "Freie Termine für Gruppencoaching, Social Walk und mehr in Essen – Hundekurse online buchen.",
 };
 
 export const dynamic = "force-dynamic";

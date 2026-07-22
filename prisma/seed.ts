@@ -125,9 +125,9 @@ async function main() {
     country: "Deutschland",
     instagram: "https://www.instagram.com/hundsgescheit/",
     facebook: "",
-    metaTitleDefault: "Hundetraining mit Herz & Verstand | Hundsgescheit",
+    metaTitleDefault: "Hundeschule Essen – Hundetraining mit Herz & Verstand",
     metaDescriptionDefault:
-      "Hundeschule in Essen und Umgebung: Einzel-, Gruppen- und Onlinecoaching sowie Social Walks. Hundetraining mit Herz & Verstand – auch für reaktive Hunde.",
+      "Hundeschule in Essen & Umgebung: Einzel-, Gruppen- & Onlinecoaching sowie Social Walks. Hundetrainerin Chiara – spezialisiert auf reaktive Hunde, mit Herz & Verstand.",
     openingHours: "Termine nach Vereinbarung",
   };
   await db.setting.createMany({ data: Object.entries(settings).map(([key, value]) => ({ key, value })) });
@@ -336,7 +336,7 @@ async function main() {
     navLabel: "Startseite",
     order: 0,
     isSystem: true,
-    metaTitle: "Hundetraining mit Herz & Verstand | Hundsgescheit",
+    metaTitle: "Hundeschule Essen – Hundetraining mit Herz & Verstand",
     metaDescription: settings.metaDescriptionDefault,
     sections: [
       section("HERO", {
@@ -380,8 +380,8 @@ async function main() {
     slug: "ueber-uns",
     title: "Über uns",
     order: 1,
-    metaTitle: "Über uns – Hundetraining auf Augenhöhe | Hundsgescheit",
-    metaDescription: "Lerne Chiara kennen – Hundetrainerin aus Essen mit Herz, Verstand und eigenen impulsiven Hunden.",
+    metaTitle: "Hundetrainerin in Essen – über Chiara & Hundsgescheit",
+    metaDescription: "Lerne Chiara kennen – deine Hundetrainerin in Essen. Hundetraining auf Augenhöhe, mit eigener Erfahrung mit reaktiven und impulsiven Hunden.",
     sections: [
       section("HERO", {
         headline: "Über uns",
@@ -416,8 +416,8 @@ async function main() {
     slug: "dienstleistungen",
     title: "Dienstleistungen",
     order: 2,
-    metaTitle: "Dienstleistungen – Hundetraining & Coaching | Hundsgescheit",
-    metaDescription: "Einzelcoaching, Gruppencoaching, Onlinecoaching und Social Walk – Hundetraining in Essen und Umgebung.",
+    metaTitle: "Hundetraining Essen – Einzel-, Gruppen- & Onlinecoaching",
+    metaDescription: "Hundetraining & Coaching in Essen: Einzelcoaching, Gruppencoaching, Onlinecoaching und Social Walk. Finde das passende Angebot für dich und deinen Hund.",
     sections: [
       section("HERO", {
         headline: "Dienstleistungen",
@@ -453,8 +453,8 @@ async function main() {
       title: c.title,
       order: 3 + i,
       showInNav: true, // erscheinen als Dropdown-Kinder von "Dienstleistungen"
-      metaTitle: `${c.title} | Hundsgescheit`,
-      metaDescription: c.shortDesc,
+      metaTitle: `${c.title} in Essen – Hundetraining`,
+      metaDescription: `${c.shortDesc} Hundetraining in Essen und Umgebung.`,
       sections: [
         section("HERO", {
           headline: c.title,
@@ -477,8 +477,8 @@ async function main() {
     title: "Kontakt",
     order: 10,
     showInNav: false, // eigener CTA-Button im Header
-    metaTitle: "Kontakt – Jetzt anfragen | Hundsgescheit",
-    metaDescription: "Nimm Kontakt mit Chiara auf – Hundetraining in Essen und Umgebung.",
+    metaTitle: "Kontakt – Hundetraining in Essen anfragen",
+    metaDescription: "Kontakt zu Hundsgescheit – deiner Hundeschule in Essen und Umgebung. Schreib mir für ein unverbindliches Erstgespräch.",
     sections: [
       section("CONTACT", {
         heading: "Nimm Kontakt mit mir auf",

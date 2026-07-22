@@ -6,8 +6,8 @@ import { db } from "@/lib/db";
 import { formatDate } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Blog & Tipps",
-  description: "Tipps und Gedanken rund ums Hundetraining – mit Herz und Verstand.",
+  title: "Hundetraining-Tipps & Blog aus Essen",
+  description: "Tipps, Wissen und Geschichten rund ums Hundetraining aus Essen – für ein starkes Team aus Mensch und Hund.",
 };
 
 export default async function BlogIndex() {
